@@ -1,0 +1,2 @@
+# toot
+Mastodon Server API
