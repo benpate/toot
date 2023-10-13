@@ -16,7 +16,7 @@ type GetAnnouncements struct {
 // https://docs.joinmastodon.org/methods/announcements/#dismiss
 // POST /api/v1/announcements/:id/dismiss
 // Returns: Empty struct
-type PostAnnouncementDismiss struct {
+type PostAnnouncement_Dismiss struct {
 	ID string `param:"id"`
 }
 

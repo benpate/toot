@@ -34,6 +34,6 @@ type PostNotifications_Clear struct{}
 // https://docs.joinmastodon.org/methods/notifications/#dismiss
 // POST /api/v1/notifications/dismiss
 // Returns: Empty Struct
-type PostNotifications_Dismiss struct {
+type PostNotification_Dismiss struct {
 	ID string `form:"id"`
 }

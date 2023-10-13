@@ -9,7 +9,7 @@ package transaction
 // https://docs.joinmastodon.org/methods/timelines/#public
 // GET /api/v1/timelines/public
 // Returns: []Status
-type GetTimelines_Public struct {
+type GetTimeline_Public struct {
 	Local     bool   `query:"local"`
 	Remote    bool   `query:"remote"`
 	OnlyMedia bool   `query:"only_media"`
@@ -22,7 +22,7 @@ type GetTimelines_Public struct {
 // https://docs.joinmastodon.org/methods/timelines/#tag
 // GET /api/v1/timelines/tag/:hashtag
 // Returns: []Status
-type GetTimelines_Hashtag struct {
+type GetTimeline_Hashtag struct {
 	Hashtag   string   `param:"hashtag"`
 	Any       []string `query:"any"`
 	All       []string `query:"all"`
@@ -39,7 +39,7 @@ type GetTimelines_Hashtag struct {
 // https://docs.joinmastodon.org/methods/timelines/#home
 // GET /api/v1/timelines/home
 // Returns: []Status
-type GetTimelines_Home struct {
+type GetTimeline_Home struct {
 	MaxID   string `query:"max_id"`
 	SinceID string `query:"since_id"`
 	MinID   string `query:"min_id"`
@@ -49,7 +49,7 @@ type GetTimelines_Home struct {
 // https://docs.joinmastodon.org/methods/timelines/#list
 // GET /api/v1/timelines/list/:list_id
 // Returns: []Status
-type GetTimelines_List struct {
+type GetTimeline_List struct {
 	ListID  string `param:"list_id"`
 	MaxID   string `query:"max_id"`
 	SinceID string `query:"since_id"`

@@ -31,8 +31,9 @@ type PutScheduledStatus struct {
 	ScheduledAt string `form:"scheduled_at"` // ISO 8601 Datetime
 }
 
-// https://docs.joinmastodon.org/methods/scheduled_statuses/#delete
+// https://docs.joinmastodon.org/methods/scheduled_statuses/#cancel
 // DELETE /api/v1/scheduled_statuses/:id
+// Returns: Empty struct
 type DeleteScheduledStatus struct {
 	ID string `param:"id"`
 }

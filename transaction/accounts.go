@@ -8,7 +8,9 @@ package transaction
 
 // https://docs.joinmastodon.org/methods/accounts/#create
 // POST /api/v1/accounts
-type PostAccounts struct {
+// Returns: Token
+// Register an account
+type PostAccount struct {
 	Username  string `form:"username"`
 	Email     string `form:"email"`
 	Password  string `form:"password"`
@@ -19,11 +21,13 @@ type PostAccounts struct {
 
 // https://docs.joinmastodon.org/methods/accounts/#verify_credentials
 // GET /api/v1/accounts/verify_credentials
-type GetAccounts_VerifyCredentials struct{}
+// Returns: CredentialAccount
+// Test to make sure that the user token works.
+type GetAccount_VerifyCredentials struct{}
 
 // https://docs.joinmastodon.org/methods/accounts/#update_credentials
 // PATCH /api/v1/accounts/update_credentials
-type PatchAccounts_UpdateCredentials struct {
+type PatchAccount_UpdateCredentials struct {
 	DisplayName  string `form:"display_name"`
 	Note         string `form:"note"`
 	Avatar       string `form:"avatar"`
@@ -118,7 +122,7 @@ type PostAccount_Block struct {
 // https://docs.joinmastodon.org/methods/accounts/#unblock
 // POST /api/v1/accounts/:id/unblock
 // Returns: Relationship
-type PostAccount_Unbock struct {
+type PostAccount_Unblock struct {
 	ID string `param:"id"`
 }
 
