@@ -1,0 +1,221 @@
+package txn
+
+/******************************************
+ * Accounts API Methods
+ * Methods concerning accounts and profiles
+ * https://docs.joinmastodon.org/methods/accounts/
+ ******************************************/
+
+// https://docs.joinmastodon.org/methods/accounts/#create
+// POST /api/v1/accounts
+// Returns: Token
+// Register an account
+type PostAccount struct {
+	Authorization string `header:"Authorization"`
+	Username      string `form:"username"`
+	Email         string `form:"email"`
+	Password      string `form:"password"`
+	Agreement     bool   `form:"agreement"`
+	Locale        string `form:"locale"`
+	Reason        string `form:"reason"`
+}
+
+// https://docs.joinmastodon.org/methods/accounts/#verify_credentials
+// GET /api/v1/accounts/verify_credentials
+// Returns: CredentialAccount
+// Test to make sure that the user token works.
+type GetAccount_VerifyCredentials struct {
+	Authorization string `header:"Authorization"`
+}
+
+// https://docs.joinmastodon.org/methods/accounts/#update_credentials
+// PATCH /api/v1/accounts/update_credentials
+type PatchAccount_UpdateCredentials struct {
+	Authorization string `header:"Authorization"`
+	DisplayName   string `form:"display_name"`
+	Note          string `form:"note"`
+	Avatar        string `form:"avatar"`
+	Header        string `form:"header"`
+	Locked        bool   `form:"locked"`
+	Bot           bool   `form:"bot"`
+	Discoverable  bool   `form:"discoverable"`
+}
+
+// https://docs.joinmastodon.org/methods/accounts/#get
+// GET /api/v1/accounts/:id
+type GetAccount struct {
+	Authorization string `header:"Authorization"`
+	ID            string `param:"id"`
+}
+
+// https://docs.joinmastodon.org/methods/accounts/#statuses
+// GET /api/v1/accounts/:id/statuses
+type GetAccount_Statuses struct {
+	Authorization  string `header:"Authorization"`
+	ID             string `param:"id"`
+	MaxID          string `query:"max_id"`
+	SinceID        string `query:"since_id"`
+	MinID          string `query:"min_id"`
+	Limit          int    `query:"limit"`
+	OnlyMedia      bool   `query:"only_media"`
+	ExcludeReplies bool   `query:"exclude_replies"`
+	ExcludeReblogs bool   `query:"exclude_reblogs"`
+	Pinned         bool   `query:"pinned"`
+	Tagged         string `query:"tagged"`
+}
+
+// https://docs.joinmastodon.org/methods/accounts/#followers
+// GET /api/v1/accounts/:id/followers
+type GetAccount_Followers struct {
+	Authorization string `header:"Authorization"`
+	ID            string `param:"id"`
+	MaxID         string `query:"max_id"`
+	SinceID       string `query:"since_id"`
+	MinID         string `query:"min_id"`
+	Limit         int    `query:"limit"`
+}
+
+// https://docs.joinmastodon.org/methods/accounts/#following
+// GET /api/v1/accounts/:id/following
+type GetAccount_Following struct {
+	Authorization string `header:"Authorization"`
+	ID            string `param:"id"`
+	MaxID         string `query:"max_id"`
+	SinceID       string `query:"since_id"`
+	MinID         string `query:"min_id"`
+	Limit         int    `query:"limit"`
+}
+
+// https://docs.joinmastodon.org/methods/accounts/#featured_tags
+// GET /api/v1/accounts/:id/featured_tags
+type GetAccount_FeaturedTags struct {
+	Authorization string `header:"Authorization"`
+	ID            string `param:"id"`
+}
+
+// https://docs.joinmastodon.org/methods/accounts/#lists
+// GET /api/v1/accounts/:id/lists
+type GetAccount_Lists struct {
+	Authorization string `header:"Authorization"`
+	ID            string `param:"id"`
+}
+
+// https://docs.joinmastodon.org/methods/accounts/#follow
+// POST /api/v1/accounts/:id/follow
+type PostAccount_Follow struct {
+	Authorization string   `header:"Authorization"`
+	ID            string   `param:"id"`
+	Reblogs       bool     `form:"reblogs"`
+	Notify        bool     `form:"notify"`
+	Languages     []string `form:"languages"`
+}
+
+// https://docs.joinmastodon.org/methods/accounts/#unfollow
+// POST /api/v1/accounts/:id/unfollow
+type PostAccount_Unfollow struct {
+	Authorization string `header:"Authorization"`
+	ID            string `param:"id"`
+}
+
+// https://docs.joinmastodon.org/methods/accounts/#remove_from_followers
+// POST /api/v1/accounts/:id/remove_from_followers
+// Returns: Relationship
+type PostAccount_RemoveFromFollowers struct {
+	Authorization string `header:"Authorization"`
+	ID            string `param:"id"`
+}
+
+// https://docs.joinmastodon.org/methods/accounts/#block
+// POST /api/v1/accounts/:id/block
+// Returns: Relationship
+type PostAccount_Block struct {
+	Authorization string `header:"Authorization"`
+	ID            string `param:"id"`
+}
+
+// https://docs.joinmastodon.org/methods/accounts/#unblock
+// POST /api/v1/accounts/:id/unblock
+// Returns: Relationship
+type PostAccount_Unblock struct {
+	Authorization string `header:"Authorization"`
+	ID            string `param:"id"`
+}
+
+// https://docs.joinmastodon.org/methods/accounts/#mute
+// POST /api/v1/accounts/:id/mute
+// Returns: Relationship
+type PostAccount_Mute struct {
+	Authorization string `header:"Authorization"`
+	ID            string `param:"id"`
+	Notifications bool   `form:"notifications"`
+	Duration      bool   `form:"duration"`
+}
+
+// https://docs.joinmastodon.org/methods/accounts/#unmute
+// POST /api/v1/accounts/:id/unmute
+// Returns: Relationship
+type PostAccount_Unmute struct {
+	Authorization string `header:"Authorization"`
+	ID            string `param:"id"`
+}
+
+// https://docs.joinmastodon.org/methods/accounts/#pin
+// POST /api/v1/accounts/:id/pin
+// Returns: Relationship
+type PostAccount_Pin struct {
+	Authorization string `header:"Authorization"`
+	ID            string `param:"id"`
+}
+
+// https://docs.joinmastodon.org/methods/accounts/#unpin
+// POST /api/v1/accounts/:id/unpin
+// Returns: Relationship
+type PostAccount_Unpin struct {
+	Authorization string `header:"Authorization"`
+	ID            string `param:"id"`
+}
+
+// https://docs.joinmastodon.org/methods/accounts/#note
+// POST /api/v1/accounts/:id/note
+// Returns: Relationship
+type PostAccount_Note struct {
+	Authorization string `header:"Authorization"`
+	ID            string `param:"id"`
+	Comment       string `form:"comment"`
+}
+
+// https://docs.joinmastodon.org/methods/accounts/#relationships
+// GET /api/v1/accounts/relationships
+// Returns: Array of Relationships
+type GetAccount_Relationships struct {
+	Authorization string   `header:"Authorization"`
+	IDs           []string `query:"id[]"`
+}
+
+// https://docs.joinmastodon.org/methods/accounts/#familiar_followers
+// GET /api/v1/accounts/:id/familiar_followers
+// Returns: Array of FamiliarFollower
+type GetAccount_FamiliarFollowers struct {
+	Authorization string `header:"Authorization"`
+	ID            string `param:"id[]"`
+}
+
+// https://docs.joinmastodon.org/methods/accounts/#search
+// GET /api/v1/accounts/search
+// Returns: Array of Account
+type GetAccount_Search struct {
+	Authorization string `header:"Authorization"`
+	Q             string `query:"q"`
+	Limit         int    `query:"limit"`
+	Offset        int    `query:"offset"`
+	Resolve       bool   `query:"resolve"`
+	Following     bool   `query:"following"`
+}
+
+// https://docs.joinmastodon.org/methods/accounts/#lookup
+// GET /api/v1/accounts/lookup
+// Returns: Account
+type GetAccount_Lookup struct {
+	Authorization string `header:"Authorization"`
+	Acct          string `query:"acct"`
+}

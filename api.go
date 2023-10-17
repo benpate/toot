@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/benpate/toot/object"
-	txn "github.com/benpate/toot/transaction"
+	"github.com/benpate/toot/txn"
 )
 
 type API struct {
@@ -14,27 +14,27 @@ type API struct {
 	Authorize func(*http.Request, ...string) bool
 
 	// https://docs.joinmastodon.org/methods/accounts/
-	PostAccount                   func(*http.Request, txn.PostAccount) (object.Token, error)
-	GetAccount_VerifyCredential   func(*http.Request, txn.GetAccount_VerifyCredentials) (object.Account, error)
-	PatchAccount_UpdateCredential func(*http.Request, txn.PatchAccount_UpdateCredentials) (object.Account, error)
-	GetAccount                    func(*http.Request, txn.GetAccount) (object.Account, error)
-	GetAccount_Statuses           func(*http.Request, txn.GetAccount_Statuses) ([]object.Status, error)
-	GetAccount_Followers          func(*http.Request, txn.GetAccount_Followers) ([]object.Account, error)
-	GetAccount_Following          func(*http.Request, txn.GetAccount_Following) ([]object.Account, error)
-	GetAccount_FeaturedTags       func(*http.Request, txn.GetAccount_FeaturedTags) ([]object.Tag, error)
-	PostAccount_Follow            func(*http.Request, txn.PostAccount_Follow) (object.Relationship, error)
-	PostAccount_Unfollow          func(*http.Request, txn.PostAccount_Unfollow) (object.Relationship, error)
-	PostAccount_Block             func(*http.Request, txn.PostAccount_Block) (object.Relationship, error)
-	PostAccount_Unblock           func(*http.Request, txn.PostAccount_Unblock) (object.Relationship, error)
-	PostAccount_Mute              func(*http.Request, txn.PostAccount_Mute) (object.Relationship, error)
-	PostAccount_Unmute            func(*http.Request, txn.PostAccount_Unmute) (object.Relationship, error)
-	PostAccount_Pin               func(*http.Request, txn.PostAccount_Pin) (object.Relationship, error)
-	PostAccount_Unpin             func(*http.Request, txn.PostAccount_Unpin) (object.Relationship, error)
-	PostAccount_Note              func(*http.Request, txn.PostAccount_Note) (object.Status, error)
-	GetAccount_Relationships      func(*http.Request, txn.GetAccount_Relationships) ([]object.Relationship, error)
-	GetAccount_FamiliarFollowers  func(*http.Request, txn.GetAccount_FamiliarFollowers) (object.FamiliarFollowers, error)
-	GetAccount_Search             func(*http.Request, txn.GetAccount_Search) ([]object.Account, error)
-	GetAccount_Lookup             func(*http.Request, txn.GetAccount_Lookup) (object.Account, error)
+	PostAccount                    func(*http.Request, txn.PostAccount) (object.Token, error)
+	GetAccount_VerifyCredentials   func(*http.Request, txn.GetAccount_VerifyCredentials) (object.Account, error)
+	PatchAccount_UpdateCredentials func(*http.Request, txn.PatchAccount_UpdateCredentials) (object.Account, error)
+	GetAccount                     func(*http.Request, txn.GetAccount) (object.Account, error)
+	GetAccount_Statuses            func(*http.Request, txn.GetAccount_Statuses) ([]object.Status, error)
+	GetAccount_Followers           func(*http.Request, txn.GetAccount_Followers) ([]object.Account, error)
+	GetAccount_Following           func(*http.Request, txn.GetAccount_Following) ([]object.Account, error)
+	GetAccount_FeaturedTags        func(*http.Request, txn.GetAccount_FeaturedTags) ([]object.Tag, error)
+	PostAccount_Follow             func(*http.Request, txn.PostAccount_Follow) (object.Relationship, error)
+	PostAccount_Unfollow           func(*http.Request, txn.PostAccount_Unfollow) (object.Relationship, error)
+	PostAccount_Block              func(*http.Request, txn.PostAccount_Block) (object.Relationship, error)
+	PostAccount_Unblock            func(*http.Request, txn.PostAccount_Unblock) (object.Relationship, error)
+	PostAccount_Mute               func(*http.Request, txn.PostAccount_Mute) (object.Relationship, error)
+	PostAccount_Unmute             func(*http.Request, txn.PostAccount_Unmute) (object.Relationship, error)
+	PostAccount_Pin                func(*http.Request, txn.PostAccount_Pin) (object.Relationship, error)
+	PostAccount_Unpin              func(*http.Request, txn.PostAccount_Unpin) (object.Relationship, error)
+	PostAccount_Note               func(*http.Request, txn.PostAccount_Note) (object.Status, error)
+	GetAccount_Relationships       func(*http.Request, txn.GetAccount_Relationships) ([]object.Relationship, error)
+	GetAccount_FamiliarFollowers   func(*http.Request, txn.GetAccount_FamiliarFollowers) (object.FamiliarFollowers, error)
+	GetAccount_Search              func(*http.Request, txn.GetAccount_Search) ([]object.Account, error)
+	GetAccount_Lookup              func(*http.Request, txn.GetAccount_Lookup) (object.Account, error)
 
 	// https://docs.joinmastodon.org/methods/announcements/
 	GetAnnouncements            func(*http.Request, txn.GetAnnouncements) ([]object.Announcement, error)
