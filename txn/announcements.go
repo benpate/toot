@@ -10,6 +10,7 @@ package txn
 // GET /api/v1/announcements
 // Returns: Array of Announcement
 type GetAnnouncements struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	WithDismissed bool   `query:"with_dismissed"`
 }
@@ -18,6 +19,7 @@ type GetAnnouncements struct {
 // POST /api/v1/announcements/:id/dismiss
 // Returns: Empty struct
 type PostAnnouncement_Dismiss struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`
 }
@@ -26,6 +28,7 @@ type PostAnnouncement_Dismiss struct {
 // PUT /api/v1/announcements/:id/reactions/:name
 // Returns: Empty struct
 type PutAnnouncement_Reaction struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`
 	Name          string `param:"name"`
@@ -35,6 +38,7 @@ type PutAnnouncement_Reaction struct {
 // DELETE /api/v1/announcements/:id/reactions/:name
 // Returns: Empty struct
 type DeleteAnnouncement_Reaction struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`
 	Name          string `param:"name"`

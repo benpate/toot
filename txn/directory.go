@@ -11,6 +11,7 @@ package txn
 // Returns: Array of Account
 // List accounts visible in the directory.
 type GetDirectory struct {
+	Host   string `header:"Host"`
 	Offset int    `query:"offset"`
 	Limit  int    `query:"limit"`
 	Order  string `query:"order"`

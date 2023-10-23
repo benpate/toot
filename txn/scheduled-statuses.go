@@ -10,6 +10,7 @@ package txn
 // GET /api/v1/scheduled_statuses
 // Returns: []ScheduledStatus
 type GetScheduledStatuses struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	MaxID         string `query:"max_id"`
 	SinceID       string `query:"since_id"`
@@ -21,6 +22,7 @@ type GetScheduledStatuses struct {
 // GET /api/v1/scheduled_statuses/:id
 // Returns: ScheduledStatus
 type GetScheduledStatus struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`
 }
@@ -29,6 +31,7 @@ type GetScheduledStatus struct {
 // PUT /api/v1/scheduled_statuses/:id
 // Returns: ScheduledStatus
 type PutScheduledStatus struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`
 	ScheduledAt   string `form:"scheduled_at"` // ISO 8601 Datetime
@@ -38,6 +41,7 @@ type PutScheduledStatus struct {
 // DELETE /api/v1/scheduled_statuses/:id
 // Returns: Empty struct
 type DeleteScheduledStatus struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`
 }

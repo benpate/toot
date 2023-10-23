@@ -10,6 +10,7 @@ package txn
 // GET /api/v2/filters
 // Returns: Array of Filter
 type GetFilters struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 }
 
@@ -17,6 +18,7 @@ type GetFilters struct {
 // GET /api/v2/filters/:id
 // Returns: Filter
 type GetFilter struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`
 }
@@ -26,12 +28,14 @@ type GetFilter struct {
 // Returns: Filter
 // Create a filter group with the given parameters.
 type PostFilter struct {
+	Host               string   `header:"Host"`
 	Authorization      string   `header:"Authorization"`
 	Title              string   `form:"title"`
 	Context            []string `form:"context"`
 	FilterAction       string   `form:"filter_action"`
 	ExpiresIn          int      `form:"expires_in"`
 	KeywordsAttributes []struct {
+		Host      string `header:"Host"`
 		Keyword   string `form:"keyword"`
 		WholeWord bool   `form:"whole_word"`
 	} `form:"keywords_attributes"`
@@ -42,6 +46,7 @@ type PostFilter struct {
 // Returns: Filter
 // Update a filter group with the given parameters.
 type PutFilter struct {
+	Host               string   `header:"Host"`
 	Authorization      string   `header:"Authorization"`
 	ID                 string   `param:"id"`           // The ID of the Filter in the database.
 	Title              string   `form:"title"`         // The name of the filter group.
@@ -49,6 +54,7 @@ type PutFilter struct {
 	FilterAction       string   `form:"filter_action"` // The policy to be applied when the filter is matched. Specify warn or hide.
 	ExpiresIn          int      `form:"expires_in"`    // How many seconds from now should the filter expire?
 	KeywordsAttributes []struct {
+		Host      string `header:"Host"`
 		Keyword   string `form:"keyword"`    // A keyword to be added to the newly-created filter group.
 		WholeWord bool   `form:"whole_word"` // Whether the keyword should consider word boundaries.
 		ID        string `form:"id"`         // Provide the ID of an existing keyword to modify it, instead of creating a new keyword.
@@ -61,6 +67,7 @@ type PutFilter struct {
 // Returns: Empty object
 // Delete a filter group.
 type DeleteFilter struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"` // The ID of the Filter in the database.
 }
@@ -70,6 +77,7 @@ type DeleteFilter struct {
 // Returns: Array of FilterKeyword
 // List all keywords attached to the current filter group.
 type GetFilter_Keywords struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	FilterID      string `param:"filter_id"` // The ID of the Filter in the database.
 }
@@ -79,6 +87,7 @@ type GetFilter_Keywords struct {
 // Returns: FilterKeyword
 // Add the given keyword to the specified filter group
 type PostFilter_Keyword struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	FilterID      string `param:"filter_id"` // The ID of the Filter in the database.
 	Keyword       string `form:"keyword"`    // The keyword to be added to the filter group.
@@ -90,6 +99,7 @@ type PostFilter_Keyword struct {
 // Returns: FilterKeyword
 // Get one filter keyword by the given id
 type GetFilter_Keyword struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"` // The ID of the FilterKeyword in the database.
 }
@@ -99,6 +109,7 @@ type GetFilter_Keyword struct {
 // Returns: FilterKeyword
 // Update the given filter keyword.
 type PutFilter_Keyword struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`        // The ID of the FilterKeyword in the database.
 	Keyword       string `form:"keyword"`    // The keyword to be added to the filter group.
@@ -110,6 +121,7 @@ type PutFilter_Keyword struct {
 // Returns: Empty object
 // Delete the given filter keyword.
 type DeleteFilter_Keyword struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"` // The ID of the FilterKeyword in the database.
 }
@@ -119,6 +131,7 @@ type DeleteFilter_Keyword struct {
 // Returns: Array of FilterStatus
 // Obtain a list of all status filters within this filter group.
 type GetFilter_Statuses struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	FilterID      string `param:"filter_id"` // The ID of the Filter in the database.
 }
@@ -128,6 +141,7 @@ type GetFilter_Statuses struct {
 // Returns: FilterStatus
 // Add a status filter to the current filter group.
 type PostFilter_Status struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	FilterID      string `param:"filter_id"` // The ID of the Filter in the database.
 }
@@ -137,6 +151,7 @@ type PostFilter_Status struct {
 // Returns: FilterStatus
 // Obtain a single status filter.
 type GetFilter_Status struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"` // The ID of the FilterStatus in the database.
 }
@@ -146,6 +161,7 @@ type GetFilter_Status struct {
 // Returns: FilterStatus
 // Remove a status filter from the current filter group.
 type DeleteFilter_Status struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"` // The ID of the FilterStatus in the database.
 }
@@ -154,6 +170,7 @@ type DeleteFilter_Status struct {
 // GET /api/v1/filters
 // Returns List of V1::"Filter"
 type GetFilters_V1 struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 }
 
@@ -161,6 +178,7 @@ type GetFilters_V1 struct {
 // GET /api/v1/filters/:id
 // Returns V1::"Filter"
 type GetFilter_V1 struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`
 }
@@ -169,6 +187,7 @@ type GetFilter_V1 struct {
 // POST /api/v1/filters
 // Returns V1::"Filter"
 type PostFilter_V1 struct {
+	Host          string   `header:"Host"`
 	Authorization string   `header:"Authorization"`
 	Phrase        string   `form:"phrase"`
 	Context       []string `form:"context"`
@@ -181,6 +200,7 @@ type PostFilter_V1 struct {
 // PUT /api/v1/filters/:id
 // Returns V1::"Filter"
 type PutFilter_V1 struct {
+	Host          string   `header:"Host"`
 	Authorization string   `header:"Authorization"`
 	ID            string   `param:"id"`
 	Phrase        string   `form:"phrase"`
@@ -194,6 +214,7 @@ type PutFilter_V1 struct {
 // DELETE /api/v1/filters/:id
 // Returns Empty object
 type DeleteFilter_V1 struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`
 }

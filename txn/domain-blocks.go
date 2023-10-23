@@ -10,6 +10,7 @@ package txn
 // GET /api/v1/domain_blocks
 // Returns: Array of String
 type GetDomainBlocks struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	MaxID         string `query:"max_id"`
 	SinceID       string `query:"since_id"`
@@ -21,6 +22,7 @@ type GetDomainBlocks struct {
 // POST /api/v1/domain_blocks
 // Returns: Empty struct
 type PostDomainBlock struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	Domain        string `form:"domain"`
 }
@@ -29,6 +31,7 @@ type PostDomainBlock struct {
 // DELETE /api/v1/domain_blocks
 // Returns: Empty struct
 type DeleteDomainBlock struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	Domain        string `form:"domain"`
 }

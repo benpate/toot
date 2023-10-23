@@ -12,6 +12,7 @@ package txn
 // Returns: Poll
 // View a Poll
 type GetPoll struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`
 }
@@ -21,6 +22,7 @@ type GetPoll struct {
 // Returns: Poll
 // Vote on a Poll
 type PostPoll_Votes struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`
 	Choices       []int  `json:"choices"`

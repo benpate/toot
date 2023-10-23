@@ -10,6 +10,7 @@ package txn
 // GET /api/v1/featured_tags
 // Returns: Array of FeaturedTag
 type GetFeaturedTags struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 }
 
@@ -17,6 +18,7 @@ type GetFeaturedTags struct {
 // POST /api/v1/featured_tags
 // Returns: FeaturedTag
 type PostFeaturedTag struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	Name          string `form:"name"`
 }
@@ -25,6 +27,7 @@ type PostFeaturedTag struct {
 // DELETE /api/v1/featured_tags/:id
 // Returns: Empty object
 type DeleteFeaturedTag struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`
 }
@@ -33,5 +36,6 @@ type DeleteFeaturedTag struct {
 // GET /api/v1/featured_tags/suggestions
 // Returns: Array of FeaturedTag
 type GetFeaturedTags_Suggestions struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 }

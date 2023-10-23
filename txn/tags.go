@@ -10,6 +10,7 @@ package txn
 // GET /api/v1/tags/:id
 // Returns: Tag
 type GetTag struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`
 }
@@ -18,6 +19,7 @@ type GetTag struct {
 // POST /api/v1/tags/:id/follow
 // Returns: Tag
 type PostTag_Follow struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`
 }
@@ -26,6 +28,7 @@ type PostTag_Follow struct {
 // POST /api/v1/tags/:id/unfollow
 // Returns: Tag
 type PostTag_Unfollow struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`
 }

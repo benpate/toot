@@ -10,6 +10,7 @@ package txn
 // GET /api/oembed
 // Returns: OEmbed metadata
 type GetOEmbed struct {
+	Host      string `header:"Host"`
 	URL       string `query:"url"`
 	MaxWidth  int    `query:"maxwidth"`
 	MaxHeight int    `query:"maxheight"`

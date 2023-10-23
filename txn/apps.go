@@ -10,6 +10,7 @@ package txn
 // POST /api/v1/apps
 // Returns: Application
 type PostApplication struct {
+	Host         string `header:"Host"`
 	ClientName   string `form:"client_name"`
 	RedirectURIs string `form:"redirect_uris"`
 	Scopes       string `form:"scopes"`
@@ -20,5 +21,6 @@ type PostApplication struct {
 // GET /api/v1/apps/verify_credentials
 // Returns: Application
 type GetApplication_VerifyCredentials struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 }

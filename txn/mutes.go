@@ -10,6 +10,7 @@ package txn
 // GET /api/v1/mutes
 // Returns: Array of Account
 type GetMutes struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	MaxID         string `query:"max_id"`
 	SinceID       string `query:"since_id"`

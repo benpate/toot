@@ -2,223 +2,228 @@
 package toot
 
 import (
-	"net/http"
-
 	"github.com/benpate/toot/object"
 	"github.com/benpate/toot/txn"
 )
 
-type API struct {
+// API represents the collection of routes and handlers that make up a Mastodon API.
+// The API structure is dependent on an app-defined `AuthToken` that should be something like
+// a JWT key that was obtained from an OAuth2 handshake.
+type API[AuthToken ScopesGetter] struct {
 
-	// Authorize returns a middleware handler that verifies that the current user has the specified scopes.
-	Authorize func(*http.Request, ...string) bool
+	// Authorize method uses an http.Request to generate a app-defined AuthToken.
+	// This property MUST be present for the API server to work correctly.
+	Authorize Authorizer[AuthToken]
 
 	// https://docs.joinmastodon.org/methods/accounts/
-	PostAccount                    func(*http.Request, txn.PostAccount) (object.Token, error)
-	GetAccount_VerifyCredentials   func(*http.Request, txn.GetAccount_VerifyCredentials) (object.Account, error)
-	PatchAccount_UpdateCredentials func(*http.Request, txn.PatchAccount_UpdateCredentials) (object.Account, error)
-	GetAccount                     func(*http.Request, txn.GetAccount) (object.Account, error)
-	GetAccount_Statuses            func(*http.Request, txn.GetAccount_Statuses) ([]object.Status, error)
-	GetAccount_Followers           func(*http.Request, txn.GetAccount_Followers) ([]object.Account, error)
-	GetAccount_Following           func(*http.Request, txn.GetAccount_Following) ([]object.Account, error)
-	GetAccount_FeaturedTags        func(*http.Request, txn.GetAccount_FeaturedTags) ([]object.Tag, error)
-	PostAccount_Follow             func(*http.Request, txn.PostAccount_Follow) (object.Relationship, error)
-	PostAccount_Unfollow           func(*http.Request, txn.PostAccount_Unfollow) (object.Relationship, error)
-	PostAccount_Block              func(*http.Request, txn.PostAccount_Block) (object.Relationship, error)
-	PostAccount_Unblock            func(*http.Request, txn.PostAccount_Unblock) (object.Relationship, error)
-	PostAccount_Mute               func(*http.Request, txn.PostAccount_Mute) (object.Relationship, error)
-	PostAccount_Unmute             func(*http.Request, txn.PostAccount_Unmute) (object.Relationship, error)
-	PostAccount_Pin                func(*http.Request, txn.PostAccount_Pin) (object.Relationship, error)
-	PostAccount_Unpin              func(*http.Request, txn.PostAccount_Unpin) (object.Relationship, error)
-	PostAccount_Note               func(*http.Request, txn.PostAccount_Note) (object.Status, error)
-	GetAccount_Relationships       func(*http.Request, txn.GetAccount_Relationships) ([]object.Relationship, error)
-	GetAccount_FamiliarFollowers   func(*http.Request, txn.GetAccount_FamiliarFollowers) (object.FamiliarFollowers, error)
-	GetAccount_Search              func(*http.Request, txn.GetAccount_Search) ([]object.Account, error)
-	GetAccount_Lookup              func(*http.Request, txn.GetAccount_Lookup) (object.Account, error)
+	PostAccount                    func(AuthToken, txn.PostAccount) (object.Token, error)
+	GetAccount_VerifyCredentials   func(AuthToken, txn.GetAccount_VerifyCredentials) (object.Account, error)
+	PatchAccount_UpdateCredentials func(AuthToken, txn.PatchAccount_UpdateCredentials) (object.Account, error)
+	GetAccount                     func(AuthToken, txn.GetAccount) (object.Account, error)
+	GetAccount_Statuses            func(AuthToken, txn.GetAccount_Statuses) ([]object.Status, error)
+	GetAccount_Followers           func(AuthToken, txn.GetAccount_Followers) ([]object.Account, error)
+	GetAccount_Following           func(AuthToken, txn.GetAccount_Following) ([]object.Account, error)
+	GetAccount_FeaturedTags        func(AuthToken, txn.GetAccount_FeaturedTags) ([]object.Tag, error)
+	PostAccount_Follow             func(AuthToken, txn.PostAccount_Follow) (object.Relationship, error)
+	PostAccount_Unfollow           func(AuthToken, txn.PostAccount_Unfollow) (object.Relationship, error)
+	PostAccount_Block              func(AuthToken, txn.PostAccount_Block) (object.Relationship, error)
+	PostAccount_Unblock            func(AuthToken, txn.PostAccount_Unblock) (object.Relationship, error)
+	PostAccount_Mute               func(AuthToken, txn.PostAccount_Mute) (object.Relationship, error)
+	PostAccount_Unmute             func(AuthToken, txn.PostAccount_Unmute) (object.Relationship, error)
+	PostAccount_Pin                func(AuthToken, txn.PostAccount_Pin) (object.Relationship, error)
+	PostAccount_Unpin              func(AuthToken, txn.PostAccount_Unpin) (object.Relationship, error)
+	PostAccount_Note               func(AuthToken, txn.PostAccount_Note) (object.Status, error)
+	GetAccount_Relationships       func(AuthToken, txn.GetAccount_Relationships) ([]object.Relationship, error)
+	GetAccount_FamiliarFollowers   func(AuthToken, txn.GetAccount_FamiliarFollowers) (object.FamiliarFollowers, error)
+	GetAccount_Search              func(AuthToken, txn.GetAccount_Search) ([]object.Account, error)
+	GetAccount_Lookup              func(AuthToken, txn.GetAccount_Lookup) (object.Account, error)
 
 	// https://docs.joinmastodon.org/methods/announcements/
-	GetAnnouncements            func(*http.Request, txn.GetAnnouncements) ([]object.Announcement, error)
-	PostAnnouncement_Dismiss    func(*http.Request, txn.PostAnnouncement_Dismiss) (struct{}, error)
-	PutAnnouncement_Reaction    func(*http.Request, txn.PutAnnouncement_Reaction) (struct{}, error)
-	DeleteAnnouncement_Reaction func(*http.Request, txn.DeleteAnnouncement_Reaction) (struct{}, error)
+	GetAnnouncements            func(AuthToken, txn.GetAnnouncements) ([]object.Announcement, error)
+	PostAnnouncement_Dismiss    func(AuthToken, txn.PostAnnouncement_Dismiss) (struct{}, error)
+	PutAnnouncement_Reaction    func(AuthToken, txn.PutAnnouncement_Reaction) (struct{}, error)
+	DeleteAnnouncement_Reaction func(AuthToken, txn.DeleteAnnouncement_Reaction) (struct{}, error)
 
 	// https://docs.joinmastodon.org/methods/apps/
-	PostApplication                  func(*http.Request, txn.PostApplication) (object.Application, error)
-	GetApplication_VerifyCredentials func(*http.Request, txn.GetApplication_VerifyCredentials) (object.Application, error)
+	PostApplication                  func(AuthToken, txn.PostApplication) (object.Application, error)
+	GetApplication_VerifyCredentials func(AuthToken, txn.GetApplication_VerifyCredentials) (object.Application, error)
 
 	// https://docs.joinmastodon.org/methods/blocks/
-	GetBlocks func(*http.Request, txn.GetBlocks) ([]object.Account, error)
+	GetBlocks func(AuthToken, txn.GetBlocks) ([]object.Account, error)
 
 	// https://docs.joinmastodon.org/methods/bookmarks/
-	GetBookmarks func(*http.Request, txn.GetBookmarks) ([]object.Status, error)
+	GetBookmarks func(AuthToken, txn.GetBookmarks) ([]object.Status, error)
 
 	// https://docs.joinmastodon.org/methods/conversations/
-	GetConversations     func(*http.Request, txn.GetConversations) ([]object.Conversation, error)
-	DeleteConversation   func(*http.Request, txn.DeleteConversation) (struct{}, error)
-	PostConversationRead func(*http.Request, txn.PostConversationRead) (struct{}, error)
+	GetConversations     func(AuthToken, txn.GetConversations) ([]object.Conversation, error)
+	DeleteConversation   func(AuthToken, txn.DeleteConversation) (struct{}, error)
+	PostConversationRead func(AuthToken, txn.PostConversationRead) (struct{}, error)
 
 	// https://docs.joinmastodon.org/methods/custom_emojis/
-	GetCustomEmojis func(*http.Request, txn.GetCustomEmojis) ([]object.CustomEmoji, error)
+	GetCustomEmojis func(AuthToken, txn.GetCustomEmojis) ([]object.CustomEmoji, error)
 
 	// https://docs.joinmastodon.org/methods/directory/
-	GetDirectory func(*http.Request, txn.GetDirectory) ([]object.Account, error)
+	GetDirectory func(AuthToken, txn.GetDirectory) ([]object.Account, error)
 
 	// https://docs.joinmastodon.org/methods/domain_blocks/
-	GetDomainBlocks   func(*http.Request, txn.GetDomainBlocks) ([]string, error)
-	PostDomainBlock   func(*http.Request, txn.PostDomainBlock) (struct{}, error)
-	DeleteDomainBlock func(*http.Request, txn.DeleteDomainBlock) (struct{}, error)
+	GetDomainBlocks   func(AuthToken, txn.GetDomainBlocks) ([]string, error)
+	PostDomainBlock   func(AuthToken, txn.PostDomainBlock) (struct{}, error)
+	DeleteDomainBlock func(AuthToken, txn.DeleteDomainBlock) (struct{}, error)
 
 	// https://docs.joinmastodon.org/methods/emails/
-	PostEmailConfirmation func(*http.Request, txn.PostEmailConfirmation) (struct{}, error)
+	PostEmailConfirmation func(AuthToken, txn.PostEmailConfirmation) (struct{}, error)
 
 	// https://docs.joinmastodon.org/methods/endorsements/
-	GetEndorsements func(*http.Request, txn.GetEndorsements) ([]object.Account, error)
+	GetEndorsements func(AuthToken, txn.GetEndorsements) ([]object.Account, error)
 
 	// https://docs.joinmastodon.org/methods/favourites/
-	GetFavourites func(*http.Request, txn.GetFavourites) ([]object.Status, error)
+	GetFavourites func(AuthToken, txn.GetFavourites) ([]object.Status, error)
 
 	// https://docs.joinmastodon.org/methods/featured_tags/
-	GetFeaturedTags             func(*http.Request, txn.GetFeaturedTags) ([]object.FeaturedTag, error)
-	PostFeaturedTag             func(*http.Request, txn.PostFeaturedTag) (object.FeaturedTag, error)
-	DeleteFeaturedTag           func(*http.Request, txn.DeleteFeaturedTag) (struct{}, error)
-	GetFeaturedTags_Suggestions func(*http.Request, txn.GetFeaturedTags_Suggestions) ([]object.FeaturedTag, error)
+	GetFeaturedTags             func(AuthToken, txn.GetFeaturedTags) ([]object.FeaturedTag, error)
+	PostFeaturedTag             func(AuthToken, txn.PostFeaturedTag) (object.FeaturedTag, error)
+	DeleteFeaturedTag           func(AuthToken, txn.DeleteFeaturedTag) (struct{}, error)
+	GetFeaturedTags_Suggestions func(AuthToken, txn.GetFeaturedTags_Suggestions) ([]object.FeaturedTag, error)
 
 	// https://docs.joinmastodon.org/methods/filters/
-	GetFilters           func(*http.Request, txn.GetFilters) ([]object.Filter, error)
-	GetFilter            func(*http.Request, txn.GetFilter) (object.Filter, error)
-	PostFilter           func(*http.Request, txn.PostFilter) (object.Filter, error)
-	PutFilter            func(*http.Request, txn.PutFilter) (object.Filter, error)
-	DeleteFilter         func(*http.Request, txn.DeleteFilter) (struct{}, error)
-	GetFilter_Keywords   func(*http.Request, txn.GetFilter_Keywords) ([]string, error)
-	PostFilter_Keyword   func(*http.Request, txn.PostFilter_Keyword) (struct{}, error)
-	GetFilter_Keyword    func(*http.Request, txn.GetFilter_Keyword) (struct{}, error)
-	PutFilter_Keyword    func(*http.Request, txn.PutFilter_Keyword) (struct{}, error)
-	DeleteFilter_Keyword func(*http.Request, txn.DeleteFilter_Keyword) (struct{}, error)
-	GetFilter_Statuses   func(*http.Request, txn.GetFilter_Statuses) ([]object.FilterStatus, error)
-	PostFilter_Status    func(*http.Request, txn.PostFilter_Status) (object.FilterStatus, error)
-	GetFilter_Status     func(*http.Request, txn.GetFilter_Status) (object.FilterStatus, error)
-	DeleteFilter_Status  func(*http.Request, txn.DeleteFilter_Status) (struct{}, error)
-	GetFilter_V1         func(*http.Request, txn.GetFilter_V1) (object.Filter, error)
-	PostFilter_V1        func(*http.Request, txn.PostFilter_V1) (object.Filter, error)
-	PutFilter_V1         func(*http.Request, txn.PutFilter_V1) (object.Filter, error)
-	DeleteFilter_V1      func(*http.Request, txn.DeleteFilter_V1) (struct{}, error)
+	GetFilters           func(AuthToken, txn.GetFilters) ([]object.Filter, error)
+	GetFilter            func(AuthToken, txn.GetFilter) (object.Filter, error)
+	PostFilter           func(AuthToken, txn.PostFilter) (object.Filter, error)
+	PutFilter            func(AuthToken, txn.PutFilter) (object.Filter, error)
+	DeleteFilter         func(AuthToken, txn.DeleteFilter) (struct{}, error)
+	GetFilter_Keywords   func(AuthToken, txn.GetFilter_Keywords) ([]string, error)
+	PostFilter_Keyword   func(AuthToken, txn.PostFilter_Keyword) (struct{}, error)
+	GetFilter_Keyword    func(AuthToken, txn.GetFilter_Keyword) (struct{}, error)
+	PutFilter_Keyword    func(AuthToken, txn.PutFilter_Keyword) (struct{}, error)
+	DeleteFilter_Keyword func(AuthToken, txn.DeleteFilter_Keyword) (struct{}, error)
+	GetFilter_Statuses   func(AuthToken, txn.GetFilter_Statuses) ([]object.FilterStatus, error)
+	PostFilter_Status    func(AuthToken, txn.PostFilter_Status) (object.FilterStatus, error)
+	GetFilter_Status     func(AuthToken, txn.GetFilter_Status) (object.FilterStatus, error)
+	DeleteFilter_Status  func(AuthToken, txn.DeleteFilter_Status) (struct{}, error)
+	GetFilter_V1         func(AuthToken, txn.GetFilter_V1) (object.Filter, error)
+	PostFilter_V1        func(AuthToken, txn.PostFilter_V1) (object.Filter, error)
+	PutFilter_V1         func(AuthToken, txn.PutFilter_V1) (object.Filter, error)
+	DeleteFilter_V1      func(AuthToken, txn.DeleteFilter_V1) (struct{}, error)
 
 	// https://docs.joinmastodon.org/methods/follow_requests/
-	GetFollowRequests           func(*http.Request, txn.GetFollowRequests) ([]object.Account, error)
-	PostFollowRequest_Authorize func(*http.Request, txn.PostFollowRequest_Authorize) (object.Relationship, error)
-	PostFollowRequest_Reject    func(*http.Request, txn.PostFollowRequest_Reject) (object.Relationship, error)
+	GetFollowRequests           func(AuthToken, txn.GetFollowRequests) ([]object.Account, error)
+	PostFollowRequest_Authorize func(AuthToken, txn.PostFollowRequest_Authorize) (object.Relationship, error)
+	PostFollowRequest_Reject    func(AuthToken, txn.PostFollowRequest_Reject) (object.Relationship, error)
 
 	// https://docs.joinmastodon.org/methods/followed_tags/
-	GetFollowedTags func(*http.Request, txn.GetFollowedTags) ([]object.Tag, error)
+	GetFollowedTags func(AuthToken, txn.GetFollowedTags) ([]object.Tag, error)
 
 	// https://docs.joinmastodon.org/methods/instance/
-	GetInstance                     func(*http.Request, txn.GetInstance) (object.Instance, error)
-	GetInstance_Peers               func(*http.Request, txn.GetInstance_Peers) ([]string, error)
-	GetInstance_Activity            func(*http.Request, txn.GetInstance_Activity) (map[string]any, error)
-	GetInstance_Rules               func(*http.Request, txn.GetInstance_Rules) ([]object.Rule, error)
-	GetInstance_DomainBlocks        func(*http.Request, txn.GetInstance_DomainBlocks) ([]object.DomainBlock, error)
-	GetInstance_ExtendedDescription func(*http.Request, txn.GetInstance_ExtendedDescription) (object.ExtendedDescription, error)
+	GetInstance                     func(AuthToken, txn.GetInstance) (object.Instance, error)
+	GetInstance_Peers               func(AuthToken, txn.GetInstance_Peers) ([]string, error)
+	GetInstance_Activity            func(AuthToken, txn.GetInstance_Activity) (map[string]any, error)
+	GetInstance_Rules               func(AuthToken, txn.GetInstance_Rules) ([]object.Rule, error)
+	GetInstance_DomainBlocks        func(AuthToken, txn.GetInstance_DomainBlocks) ([]object.DomainBlock, error)
+	GetInstance_ExtendedDescription func(AuthToken, txn.GetInstance_ExtendedDescription) (object.ExtendedDescription, error)
 
 	// https://docs.joinmastodon.org/methods/lists/
-	GetLists             func(*http.Request, txn.GetLists) ([]object.List, error)
-	GetList              func(*http.Request, txn.GetList) (object.List, error)
-	PostList             func(*http.Request, txn.PostList) (object.List, error)
-	PutList              func(*http.Request, txn.PutList) (object.List, error)
-	DeleteList           func(*http.Request, txn.DeleteList) (struct{}, error)
-	GetList_Accounts     func(*http.Request, txn.GetList_Accounts) ([]object.Account, error)
-	PostList_Accounts    func(*http.Request, txn.PostList_Accounts) (struct{}, error)
-	DeleteLisst_Accounts func(*http.Request, txn.DeleteList_Accounts) (struct{}, error)
+	GetLists             func(AuthToken, txn.GetLists) ([]object.List, error)
+	GetList              func(AuthToken, txn.GetList) (object.List, error)
+	PostList             func(AuthToken, txn.PostList) (object.List, error)
+	PutList              func(AuthToken, txn.PutList) (object.List, error)
+	DeleteList           func(AuthToken, txn.DeleteList) (struct{}, error)
+	GetList_Accounts     func(AuthToken, txn.GetList_Accounts) ([]object.Account, error)
+	PostList_Accounts    func(AuthToken, txn.PostList_Accounts) (struct{}, error)
+	DeleteLisst_Accounts func(AuthToken, txn.DeleteList_Accounts) (struct{}, error)
 
 	// https://docs.joinmastodon.org/methods/markers/
-	GetMarkers func(*http.Request, txn.GetMarkers) (object.Marker, error)
-	PosMarker  func(*http.Request, txn.PostMarker) (object.Marker, error)
+	GetMarkers func(AuthToken, txn.GetMarkers) (object.Marker, error)
+	PosMarker  func(AuthToken, txn.PostMarker) (object.Marker, error)
 
 	// https://docs.joinmastodon.org/methods/media/
-	PostMedia func(*http.Request, txn.PostMedia) (object.MediaAttachment, error)
+	PostMedia func(AuthToken, txn.PostMedia) (object.MediaAttachment, error)
 
 	// https://docs.joinmastodon.org/methods/mutes/
-	GetMutes func(*http.Request, txn.GetMutes) ([]object.Account, error)
+	GetMutes func(AuthToken, txn.GetMutes) ([]object.Account, error)
 
 	// https://docs.joinmastodon.org/methods/notifications/
-	GetNotifications         func(*http.Request, txn.GetNotifications) ([]object.Notification, error)
-	GetNotification          func(*http.Request, txn.GetNotification) (object.Notification, error)
-	PostNotifications_Clear  func(*http.Request, txn.PostNotifications_Clear) (object.Notification, error)
-	PostNotification_Dismiss func(*http.Request, txn.PostNotification_Dismiss) (object.Notification, error)
+	GetNotifications         func(AuthToken, txn.GetNotifications) ([]object.Notification, error)
+	GetNotification          func(AuthToken, txn.GetNotification) (object.Notification, error)
+	PostNotifications_Clear  func(AuthToken, txn.PostNotifications_Clear) (object.Notification, error)
+	PostNotification_Dismiss func(AuthToken, txn.PostNotification_Dismiss) (object.Notification, error)
 
 	// https://docs.joinmastodon.org/methods/oauth/
-	GetOAuth_Authorize func(*http.Request, txn.GetOAuth_Authorize) (struct{}, error)
-	PostOAuth_Token    func(*http.Request, txn.PostOAuth_Token) (object.Token, error)
-	PostOAuth_Revoke   func(*http.Request, txn.PostOAuth_Revoke) (struct{}, error)
+	GetOAuth_Authorize func(AuthToken, txn.GetOAuth_Authorize) (struct{}, error)
+	PostOAuth_Token    func(AuthToken, txn.PostOAuth_Token) (object.Token, error)
+	PostOAuth_Revoke   func(AuthToken, txn.PostOAuth_Revoke) (struct{}, error)
 
 	// https://docs.joinmastodon.org/methods/oembed/
-	GetOEmbed func(*http.Request, txn.GetOEmbed) (map[string]any, error)
+	GetOEmbed func(AuthToken, txn.GetOEmbed) (map[string]any, error)
 
 	// https://docs.joinmastodon.org/methods/polls/
-	GetPoll        func(*http.Request, txn.GetPoll) ([]object.Poll, error)
-	PostPoll_Votes func(*http.Request, txn.PostPoll_Votes) ([]object.Poll, error)
+	GetPoll        func(AuthToken, txn.GetPoll) ([]object.Poll, error)
+	PostPoll_Votes func(AuthToken, txn.PostPoll_Votes) ([]object.Poll, error)
 
 	// https://docs.joinmastodon.org/methods/preferences/
-	GetPreferences func(*http.Request, txn.GetPreferences) (map[string]any, error)
+	GetPreferences func(AuthToken, txn.GetPreferences) (map[string]any, error)
 
 	// https://docs.joinmastodon.org/methods/profile/
-	DeleteProfile_Avatar func(*http.Request, txn.DeleteProfile_Avatar) (object.Account, error)
-	DeleteProfile_Header func(*http.Request, txn.DeleteProfile_Header) (object.Account, error)
+	DeleteProfile_Avatar func(AuthToken, txn.DeleteProfile_Avatar) (object.Account, error)
+	DeleteProfile_Header func(AuthToken, txn.DeleteProfile_Header) (object.Account, error)
 
 	// https://docs.joinmastodon.org/methods/reports/
-	PostReport func(*http.Request, txn.PostReport) (object.Report, error)
+	PostReport func(AuthToken, txn.PostReport) (object.Report, error)
 
 	// https://docs.joinmastodon.org/methods/scheduled_statuses/
-	GetScheduledStatuses  func(*http.Request, txn.GetScheduledStatuses) ([]object.ScheduledStatus, error)
-	GetScheduledStatus    func(*http.Request, txn.GetScheduledStatus) (object.ScheduledStatus, error)
-	PutScheduledStatus    func(*http.Request, txn.PutScheduledStatus) (object.ScheduledStatus, error)
-	DeleteScheduledStatus func(*http.Request, txn.DeleteScheduledStatus) (struct{}, error)
+	GetScheduledStatuses  func(AuthToken, txn.GetScheduledStatuses) ([]object.ScheduledStatus, error)
+	GetScheduledStatus    func(AuthToken, txn.GetScheduledStatus) (object.ScheduledStatus, error)
+	PutScheduledStatus    func(AuthToken, txn.PutScheduledStatus) (object.ScheduledStatus, error)
+	DeleteScheduledStatus func(AuthToken, txn.DeleteScheduledStatus) (struct{}, error)
 
 	// https://docs.joinmastodon.org/methods/search/
-	GetSearch func(*http.Request, txn.GetSearch) (object.Search, error)
+	GetSearch func(AuthToken, txn.GetSearch) (object.Search, error)
 
 	// https://docs.joinmastodon.org/methods/statuses/#create
-	PostStatus             func(*http.Request, txn.PostStatus) (object.Status, error)
-	GetStatus              func(*http.Request, txn.GetStatus) (object.Status, error)
-	DeleteStatus           func(*http.Request, txn.DeleteStatus) (struct{}, error)
-	GetStatus_Context      func(*http.Request, txn.GetStatus_Context) (object.Context, error)
-	PostStatus_Translate   func(*http.Request, txn.PostStatus_Translate) (object.Status, error)
-	GetStatus_RebloggedBy  func(*http.Request, txn.GetStatus_RebloggedBy) ([]object.Account, error)
-	GetStatus_FavouritedBy func(*http.Request, txn.GetStatus_FavouritedBy) ([]object.Account, error)
-	PostStatus_Favourite   func(*http.Request, txn.PostStatus_Favourite) (object.Status, error)
-	PostStatus_Unfavourite func(*http.Request, txn.PostStatus_Unfavourite) (object.Status, error)
-	PostStatus_Reblog      func(*http.Request, txn.PostStatus_Reblog) (object.Status, error)
-	PostStatus_Unreblog    func(*http.Request, txn.PostStatus_Unreblog) (object.Status, error)
-	PostStatus_Bookmark    func(*http.Request, txn.PostStatus_Bookmark) (object.Status, error)
-	PostStatus_Unbookmark  func(*http.Request, txn.PostStatus_Unbookmark) (object.Status, error)
-	PostStatus_Mute        func(*http.Request, txn.PostStatus_Mute) (object.Status, error)
-	PostStatus_Unmute      func(*http.Request, txn.PostStatus_Unmute) (object.Status, error)
-	PostStatus_Pin         func(*http.Request, txn.PostStatus_Pin) (object.Status, error)
-	PostStatus_Unpin       func(*http.Request, txn.PostStatus_Unpin) (object.Status, error)
-	PutStatus              func(*http.Request, txn.PutStatus) (object.Status, error)
-	GetStatus_History      func(*http.Request, txn.GetStatus_History) ([]object.StatusEdit, error)
-	GetStatus_Source       func(*http.Request, txn.GetStatus_Source) (object.StatusSource, error)
+	PostStatus             func(AuthToken, txn.PostStatus) (object.Status, error)
+	GetStatus              func(AuthToken, txn.GetStatus) (object.Status, error)
+	DeleteStatus           func(AuthToken, txn.DeleteStatus) (struct{}, error)
+	GetStatus_Context      func(AuthToken, txn.GetStatus_Context) (object.Context, error)
+	PostStatus_Translate   func(AuthToken, txn.PostStatus_Translate) (object.Status, error)
+	GetStatus_RebloggedBy  func(AuthToken, txn.GetStatus_RebloggedBy) ([]object.Account, error)
+	GetStatus_FavouritedBy func(AuthToken, txn.GetStatus_FavouritedBy) ([]object.Account, error)
+	PostStatus_Favourite   func(AuthToken, txn.PostStatus_Favourite) (object.Status, error)
+	PostStatus_Unfavourite func(AuthToken, txn.PostStatus_Unfavourite) (object.Status, error)
+	PostStatus_Reblog      func(AuthToken, txn.PostStatus_Reblog) (object.Status, error)
+	PostStatus_Unreblog    func(AuthToken, txn.PostStatus_Unreblog) (object.Status, error)
+	PostStatus_Bookmark    func(AuthToken, txn.PostStatus_Bookmark) (object.Status, error)
+	PostStatus_Unbookmark  func(AuthToken, txn.PostStatus_Unbookmark) (object.Status, error)
+	PostStatus_Mute        func(AuthToken, txn.PostStatus_Mute) (object.Status, error)
+	PostStatus_Unmute      func(AuthToken, txn.PostStatus_Unmute) (object.Status, error)
+	PostStatus_Pin         func(AuthToken, txn.PostStatus_Pin) (object.Status, error)
+	PostStatus_Unpin       func(AuthToken, txn.PostStatus_Unpin) (object.Status, error)
+	PutStatus              func(AuthToken, txn.PutStatus) (object.Status, error)
+	GetStatus_History      func(AuthToken, txn.GetStatus_History) ([]object.StatusEdit, error)
+	GetStatus_Source       func(AuthToken, txn.GetStatus_Source) (object.StatusSource, error)
 
 	// https://docs.joinmastodon.org/methods/suggestions/
-	GetSuggestions   func(*http.Request, txn.GetSuggestions) ([]object.Suggestion, error)
-	DeleteSuggestion func(*http.Request, txn.DeleteSuggestion) (struct{}, error)
+	GetSuggestions   func(AuthToken, txn.GetSuggestions) ([]object.Suggestion, error)
+	DeleteSuggestion func(AuthToken, txn.DeleteSuggestion) (struct{}, error)
 
 	// https://docs.joinmastodon.org/methods/tags/
-	GetTag           func(*http.Request, txn.GetTag) (object.Tag, error)
-	PostTag_Follow   func(*http.Request, txn.PostTag_Follow) (object.Tag, error)
-	PostTag_Unfollow func(*http.Request, txn.PostTag_Unfollow) (object.Tag, error)
+	GetTag           func(AuthToken, txn.GetTag) (object.Tag, error)
+	PostTag_Follow   func(AuthToken, txn.PostTag_Follow) (object.Tag, error)
+	PostTag_Unfollow func(AuthToken, txn.PostTag_Unfollow) (object.Tag, error)
 
 	// https://docs.joinmastodon.org/methods/timelines/
-	GetTimeline_Public  func(*http.Request, txn.GetTimeline_Public) ([]object.Status, error)
-	GetTimeline_Hashtag func(*http.Request, txn.GetTimeline_Hashtag) ([]object.Status, error)
-	GetTimeline_Home    func(*http.Request, txn.GetTimeline_Home) ([]object.Status, error)
-	GetTimeline_List    func(*http.Request, txn.GetTimeline_List) ([]object.Status, error)
+	GetTimeline_Public  func(AuthToken, txn.GetTimeline_Public) ([]object.Status, error)
+	GetTimeline_Hashtag func(AuthToken, txn.GetTimeline_Hashtag) ([]object.Status, error)
+	GetTimeline_Home    func(AuthToken, txn.GetTimeline_Home) ([]object.Status, error)
+	GetTimeline_List    func(AuthToken, txn.GetTimeline_List) ([]object.Status, error)
 
 	// https://docs.joinmastodon.org/methods/trends/
-	GetTrends          func(*http.Request, txn.GetTrends) ([]object.Tag, error)
-	GetTrends_Statuses func(*http.Request, txn.GetTrends_Statuses) ([]object.Status, error)
-	GetTrends_Links    func(*http.Request, txn.GetTrends_Links) ([]object.PreviewCard, error)
+	GetTrends          func(AuthToken, txn.GetTrends) ([]object.Tag, error)
+	GetTrends_Statuses func(AuthToken, txn.GetTrends_Statuses) ([]object.Status, error)
+	GetTrends_Links    func(AuthToken, txn.GetTrends_Links) ([]object.PreviewCard, error)
 }
 
-func New() API {
-	return API{}
+// New returns a bare bones API structure with no methods implemented.
+func New[AuthToken ScopesGetter](authorizer Authorizer[AuthToken]) API[AuthToken] {
+	return API[AuthToken]{
+		Authorize: authorizer,
+	}
 }

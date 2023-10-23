@@ -11,6 +11,7 @@ package txn
 // Returns: Token
 // Register an account
 type PostAccount struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	Username      string `form:"username"`
 	Email         string `form:"email"`
@@ -25,12 +26,14 @@ type PostAccount struct {
 // Returns: CredentialAccount
 // Test to make sure that the user token works.
 type GetAccount_VerifyCredentials struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 }
 
 // https://docs.joinmastodon.org/methods/accounts/#update_credentials
 // PATCH /api/v1/accounts/update_credentials
 type PatchAccount_UpdateCredentials struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	DisplayName   string `form:"display_name"`
 	Note          string `form:"note"`
@@ -44,6 +47,7 @@ type PatchAccount_UpdateCredentials struct {
 // https://docs.joinmastodon.org/methods/accounts/#get
 // GET /api/v1/accounts/:id
 type GetAccount struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`
 }
@@ -51,6 +55,7 @@ type GetAccount struct {
 // https://docs.joinmastodon.org/methods/accounts/#statuses
 // GET /api/v1/accounts/:id/statuses
 type GetAccount_Statuses struct {
+	Host           string `header:"Host"`
 	Authorization  string `header:"Authorization"`
 	ID             string `param:"id"`
 	MaxID          string `query:"max_id"`
@@ -67,6 +72,7 @@ type GetAccount_Statuses struct {
 // https://docs.joinmastodon.org/methods/accounts/#followers
 // GET /api/v1/accounts/:id/followers
 type GetAccount_Followers struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`
 	MaxID         string `query:"max_id"`
@@ -78,6 +84,7 @@ type GetAccount_Followers struct {
 // https://docs.joinmastodon.org/methods/accounts/#following
 // GET /api/v1/accounts/:id/following
 type GetAccount_Following struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`
 	MaxID         string `query:"max_id"`
@@ -89,6 +96,7 @@ type GetAccount_Following struct {
 // https://docs.joinmastodon.org/methods/accounts/#featured_tags
 // GET /api/v1/accounts/:id/featured_tags
 type GetAccount_FeaturedTags struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`
 }
@@ -96,6 +104,7 @@ type GetAccount_FeaturedTags struct {
 // https://docs.joinmastodon.org/methods/accounts/#lists
 // GET /api/v1/accounts/:id/lists
 type GetAccount_Lists struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`
 }
@@ -103,6 +112,7 @@ type GetAccount_Lists struct {
 // https://docs.joinmastodon.org/methods/accounts/#follow
 // POST /api/v1/accounts/:id/follow
 type PostAccount_Follow struct {
+	Host          string   `header:"Host"`
 	Authorization string   `header:"Authorization"`
 	ID            string   `param:"id"`
 	Reblogs       bool     `form:"reblogs"`
@@ -113,6 +123,7 @@ type PostAccount_Follow struct {
 // https://docs.joinmastodon.org/methods/accounts/#unfollow
 // POST /api/v1/accounts/:id/unfollow
 type PostAccount_Unfollow struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`
 }
@@ -121,6 +132,7 @@ type PostAccount_Unfollow struct {
 // POST /api/v1/accounts/:id/remove_from_followers
 // Returns: Relationship
 type PostAccount_RemoveFromFollowers struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`
 }
@@ -129,6 +141,7 @@ type PostAccount_RemoveFromFollowers struct {
 // POST /api/v1/accounts/:id/block
 // Returns: Relationship
 type PostAccount_Block struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`
 }
@@ -137,6 +150,7 @@ type PostAccount_Block struct {
 // POST /api/v1/accounts/:id/unblock
 // Returns: Relationship
 type PostAccount_Unblock struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`
 }
@@ -145,6 +159,7 @@ type PostAccount_Unblock struct {
 // POST /api/v1/accounts/:id/mute
 // Returns: Relationship
 type PostAccount_Mute struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`
 	Notifications bool   `form:"notifications"`
@@ -155,6 +170,7 @@ type PostAccount_Mute struct {
 // POST /api/v1/accounts/:id/unmute
 // Returns: Relationship
 type PostAccount_Unmute struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`
 }
@@ -163,6 +179,7 @@ type PostAccount_Unmute struct {
 // POST /api/v1/accounts/:id/pin
 // Returns: Relationship
 type PostAccount_Pin struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`
 }
@@ -171,6 +188,7 @@ type PostAccount_Pin struct {
 // POST /api/v1/accounts/:id/unpin
 // Returns: Relationship
 type PostAccount_Unpin struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`
 }
@@ -179,6 +197,7 @@ type PostAccount_Unpin struct {
 // POST /api/v1/accounts/:id/note
 // Returns: Relationship
 type PostAccount_Note struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`
 	Comment       string `form:"comment"`
@@ -188,6 +207,7 @@ type PostAccount_Note struct {
 // GET /api/v1/accounts/relationships
 // Returns: Array of Relationships
 type GetAccount_Relationships struct {
+	Host          string   `header:"Host"`
 	Authorization string   `header:"Authorization"`
 	IDs           []string `query:"id[]"`
 }
@@ -196,6 +216,7 @@ type GetAccount_Relationships struct {
 // GET /api/v1/accounts/:id/familiar_followers
 // Returns: Array of FamiliarFollower
 type GetAccount_FamiliarFollowers struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id[]"`
 }
@@ -204,6 +225,7 @@ type GetAccount_FamiliarFollowers struct {
 // GET /api/v1/accounts/search
 // Returns: Array of Account
 type GetAccount_Search struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	Q             string `query:"q"`
 	Limit         int    `query:"limit"`
@@ -216,6 +238,7 @@ type GetAccount_Search struct {
 // GET /api/v1/accounts/lookup
 // Returns: Account
 type GetAccount_Lookup struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	Acct          string `query:"acct"`
 }

@@ -8,7 +8,7 @@ type Status struct {
 	CreatedAt          string             `json:"created_at"`                       // The date when this status was created. (ISO 8601 Datetime)
 	Account            Account            `json:"account"`                          // The account that authored this status.
 	Content            string             `json:"content"`                          // HTML-encoded status content.
-	Visivility         string             `json:"visivility"`                       // Visibility of this status. [public | unlisted | private | direct]
+	Visibility         string             `json:"visibility"`                       // Visibility of this status. [public | unlisted | private | direct]
 	Sensitive          bool               `json:"sensitive"`                        // Is this status marked as sensitive content?
 	SpoilerText        string             `json:"spoiler_text"`                     // Subject or summary line, below which status content is collapsed until expanded.
 	MediaAttachments   []MediaAttachment  `json:"media_attachments"`                // Media that is attached to this status.

@@ -11,6 +11,7 @@ package txn
 // GET /api/v2/suggestions
 // Returns: []Suggestion
 type GetSuggestions struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	Limit         int    `query:"limit"`
 }
@@ -19,6 +20,7 @@ type GetSuggestions struct {
 // DELETE /api/v1/suggestions/:account_id
 // Returns Empty Struct
 type DeleteSuggestion struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	AccountID     string `param:"account_id"`
 }

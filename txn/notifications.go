@@ -10,6 +10,7 @@ package txn
 // GET /api/v1/notifications
 // Returns: []Notification
 type GetNotifications struct {
+	Host          string   `header:"Host"`
 	Authorization string   `header:"Authorization"`
 	MaxID         string   `query:"max_id"`
 	SinceID       string   `query:"since_id"`
@@ -24,6 +25,7 @@ type GetNotifications struct {
 // GET /api/v1/notifications/:id
 // Returns: Notification
 type GetNotification struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`
 }
@@ -32,6 +34,7 @@ type GetNotification struct {
 // POST /api/v1/notifications/clear
 // Returns: Empty Struct
 type PostNotifications_Clear struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 }
 
@@ -39,6 +42,7 @@ type PostNotifications_Clear struct {
 // POST /api/v1/notifications/dismiss
 // Returns: Empty Struct
 type PostNotification_Dismiss struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `form:"id"`
 }

@@ -10,6 +10,7 @@ package txn
 // GET /api/v1/markers
 // Returns: Marker
 type GetMarkers struct {
+	Host          string   `header:"Host"`
 	Authorization string   `header:"Authorization"`
 	Timeline      []string `query:"timeline[]"`
 }
@@ -18,11 +19,14 @@ type GetMarkers struct {
 // POST /api/v1/markers
 // Returns: Marker
 type PostMarker struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	Home          struct {
+		Host       string `header:"Host"`
 		LastReadID string `form:"last_read_id"`
 	} `form:"home"`
 	Notifications struct {
+		Host       string `header:"Host"`
 		LastReadID string `form:"last_read_id"`
 	} `form:"notifications"`
 }

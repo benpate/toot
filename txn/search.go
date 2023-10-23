@@ -10,6 +10,7 @@ package txn
 // GET /api/v2/search
 // Returns: Search
 type GetSearch struct {
+	Host              string `header:"Host"`
 	Authorization     string `header:"Authorization"`
 	Q                 string `query:"q"`
 	Type              string `query:"type"` // [accounts | hashtags | statuses]

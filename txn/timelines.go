@@ -10,6 +10,7 @@ package txn
 // GET /api/v1/timelines/public
 // Returns: []Status
 type GetTimeline_Public struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"` // Provide this header with Bearer <user token> to gain authorized access to this API method.
 	Local         bool   `query:"local"`
 	Remote        bool   `query:"remote"`
@@ -24,6 +25,7 @@ type GetTimeline_Public struct {
 // GET /api/v1/timelines/tag/:hashtag
 // Returns: []Status
 type GetTimeline_Hashtag struct {
+	Host          string   `header:"Host"`
 	Authorization string   `header:"Authorization"` // Provide this header with Bearer <user token> to gain authorized access to this API method.
 	Hashtag       string   `param:"hashtag"`
 	Any           []string `query:"any"`
@@ -42,6 +44,7 @@ type GetTimeline_Hashtag struct {
 // GET /api/v1/timelines/home
 // Returns: []Status
 type GetTimeline_Home struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"` // Provide this header with Bearer <user token> to gain authorized access to this API method.
 	MaxID         string `query:"max_id"`
 	SinceID       string `query:"since_id"`
@@ -53,6 +56,7 @@ type GetTimeline_Home struct {
 // GET /api/v1/timelines/list/:list_id
 // Returns: []Status
 type GetTimeline_List struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"` // Provide this header with Bearer <user token> to gain authorized access to this API method.
 	ListID        string `param:"list_id"`
 	MaxID         string `query:"max_id"`

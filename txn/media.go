@@ -11,6 +11,7 @@ package txn
 // POST /api/v2/media
 // Returns: MediaAttachment
 type PostMedia struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	File          string `form:"file"`
 	Thumbnail     string `form:"thumbnail"`

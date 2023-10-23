@@ -10,6 +10,7 @@ package txn
 // POST /api/v1/reports
 // Returns: Report
 type PostReport struct {
+	Host          string   `header:"Host"`
 	Authorization string   `header:"Authorization"`
 	AccountID     string   `form:"account_id"`
 	StatusIDs     []string `form:"status_ids"`

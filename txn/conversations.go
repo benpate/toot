@@ -11,6 +11,7 @@ package txn
 // GET /api/v1/conversations
 // Returns: Array of Conversation
 type GetConversations struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	MaxID         string `query:"max_id"`
 	SinceID       string `query:"since_id"`
@@ -22,6 +23,7 @@ type GetConversations struct {
 // DELETE /api/v1/conversations/:id
 // Returns: Empty struct
 type DeleteConversation struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `uri:"id"`
 }
@@ -30,6 +32,7 @@ type DeleteConversation struct {
 // POST /api/v1/conversations/:id/read
 // Returns: Conversation
 type PostConversationRead struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	ID            string `uri:"id"`
 }

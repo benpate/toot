@@ -10,6 +10,7 @@ package txn
 // GET /api/v1/follow_requests
 // Returns: Array of Account
 type GetFollowRequests struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	MaxID         string `query:"max_id"`
 	SinceID       string `query:"since_id"`
@@ -20,6 +21,7 @@ type GetFollowRequests struct {
 // POST /api/v1/follow_requests/:account_id/authorize
 // Returns: Relationship
 type PostFollowRequest_Authorize struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	AccountID     string `param:"account_id"`
 }
@@ -28,6 +30,7 @@ type PostFollowRequest_Authorize struct {
 // POST /api/v1/follow_requests/:account_id/reject
 // Returns: Relationship
 type PostFollowRequest_Reject struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 	AccountID     string `param:"account_id"`
 }

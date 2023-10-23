@@ -10,6 +10,7 @@ package txn
 // DELETE /api/v1/profile/avatar
 // Returns: CredentialAccount
 type DeleteProfile_Avatar struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 }
 
@@ -17,5 +18,6 @@ type DeleteProfile_Avatar struct {
 // DELETE /api/v1/profile/header
 // Returns: CredentialAccount
 type DeleteProfile_Header struct {
+	Host          string `header:"Host"`
 	Authorization string `header:"Authorization"`
 }
