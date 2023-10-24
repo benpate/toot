@@ -10,9 +10,7 @@ package txn
 // GET /api/v1/endorsements
 // Returns: Array of Account
 type GetEndorsements struct {
-	Host          string `header:"Host"`
-	Authorization string `header:"Authorization"`
-	MaxID         string `query:"max_id"`
-	SinceID       string `query:"since_id"`
-	Limit         int    `query:"limit"`
+	Host string `header:"Host"`
+
+	QueryPage
 }

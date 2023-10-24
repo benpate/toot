@@ -16,8 +16,7 @@ type GetInstance struct{}
 // Returns: []string
 // Domains that this instance is aware of.
 type GetInstance_Peers struct {
-	Host          string `header:"Host"`
-	Authorization string `header:"Authorization"`
+	Host string `header:"Host"`
 }
 
 // https://docs.joinmastodon.org/methods/instance/#activity
@@ -25,8 +24,7 @@ type GetInstance_Peers struct {
 // Returns: []map[string]any
 // Instance activity over the last 3 months, binned weekly.
 type GetInstance_Activity struct {
-	Host          string `header:"Host"`
-	Authorization string `header:"Authorization"`
+	Host string `header:"Host"`
 }
 
 // https://docs.joinmastodon.org/methods/instance/#rules
@@ -34,8 +32,7 @@ type GetInstance_Activity struct {
 // Returns: []Rule
 // Rules that the users of this service should follow.
 type GetInstance_Rules struct {
-	Host          string `header:"Host"`
-	Authorization string `header:"Authorization"`
+	Host string `header:"Host"`
 }
 
 // https://docs.joinmastodon.org/methods/instance/#domain_blocks
@@ -43,8 +40,7 @@ type GetInstance_Rules struct {
 // Returns: []DomainBlock
 // Obtain a list of domains that have been blocked.
 type GetInstance_DomainBlocks struct {
-	Host          string `header:"Host"`
-	Authorization string `header:"Authorization"`
+	Host string `header:"Host"`
 }
 
 // https://docs.joinmastodon.org/methods/instance/#extended_description
@@ -52,6 +48,5 @@ type GetInstance_DomainBlocks struct {
 // Returns: ExtendedDescription
 // Obtain an extended description of this server
 type GetInstance_ExtendedDescription struct {
-	Host          string `header:"Host"`
-	Authorization string `header:"Authorization"`
+	Host string `header:"Host"`
 }

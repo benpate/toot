@@ -11,16 +11,14 @@ package txn
 // GET /api/v2/suggestions
 // Returns: []Suggestion
 type GetSuggestions struct {
-	Host          string `header:"Host"`
-	Authorization string `header:"Authorization"`
-	Limit         int    `query:"limit"`
+	Host  string `header:"Host"`
+	Limit int    `query:"limit"`
 }
 
 // https://docs.joinmastodon.org/methods/suggestions/#remove
 // DELETE /api/v1/suggestions/:account_id
 // Returns Empty Struct
 type DeleteSuggestion struct {
-	Host          string `header:"Host"`
-	Authorization string `header:"Authorization"`
-	AccountID     string `param:"account_id"`
+	Host      string `header:"Host"`
+	AccountID string `param:"account_id"`
 }

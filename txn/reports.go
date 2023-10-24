@@ -10,12 +10,11 @@ package txn
 // POST /api/v1/reports
 // Returns: Report
 type PostReport struct {
-	Host          string   `header:"Host"`
-	Authorization string   `header:"Authorization"`
-	AccountID     string   `form:"account_id"`
-	StatusIDs     []string `form:"status_ids"`
-	Comment       string   `form:"comment"`
-	Forward       bool     `form:"forward"`
-	Category      string   `form:"category"`
-	RuleIDs       []string `form:"rule_ids"`
+	Host      string   `header:"Host"`
+	AccountID string   `form:"account_id"`
+	StatusIDs []string `form:"status_ids"`
+	Comment   string   `form:"comment"`
+	Forward   bool     `form:"forward"`
+	Category  string   `form:"category"`
+	RuleIDs   []string `form:"rule_ids"`
 }
