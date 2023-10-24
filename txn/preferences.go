@@ -10,6 +10,5 @@ package txn
 // GET /api/v1/preferences
 // Returns: Preferences
 type GetPreferences struct {
-	Host          string `header:"Host"`
-	Authorization string `header:"Authorization"`
+	Host string `header:"Host"`
 }

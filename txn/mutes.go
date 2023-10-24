@@ -10,12 +10,11 @@ package txn
 // GET /api/v1/mutes
 // Returns: Array of Account
 type GetMutes struct {
-	Host          string `header:"Host"`
-	Authorization string `header:"Authorization"`
-	MaxID         string `query:"max_id"`
-	MinID         string `query:"min_id"`
-	SinceID       string `query:"since_id"`
-	Limit         int    `query:"limit"`
+	Host    string `header:"Host"`
+	MaxID   string `query:"max_id"`
+	MinID   string `query:"min_id"`
+	SinceID string `query:"since_id"`
+	Limit   int    `query:"limit"`
 }
 
 // QueryPage implements the QueryPager interface, returning

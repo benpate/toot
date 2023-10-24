@@ -10,6 +10,5 @@ package txn
 // POST /api/v1/email/confirmation
 // Returns: Empty object
 type PostEmailConfirmation struct {
-	Host          string `header:"Host"`
-	Authorization string `header:"Authorization"`
+	Host string `header:"Host"`
 }

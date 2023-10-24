@@ -11,12 +11,11 @@ package txn
 // GET /api/v1/conversations
 // Returns: Array of Conversation
 type GetConversations struct {
-	Host          string `header:"Host"`
-	Authorization string `header:"Authorization"`
-	MaxID         string `query:"max_id"`
-	SinceID       string `query:"since_id"`
-	MinID         string `query:"min_id"`
-	Limit         int    `query:"limit"`
+	Host    string `header:"Host"`
+	MaxID   string `query:"max_id"`
+	SinceID string `query:"since_id"`
+	MinID   string `query:"min_id"`
+	Limit   int    `query:"limit"`
 }
 
 // QueryPage implements the QueryPager interface, returning
@@ -34,16 +33,14 @@ func (t GetConversations) QueryPage() QueryPage {
 // DELETE /api/v1/conversations/:id
 // Returns: Empty struct
 type DeleteConversation struct {
-	Host          string `header:"Host"`
-	Authorization string `header:"Authorization"`
-	ID            string `uri:"id"`
+	Host string `header:"Host"`
+	ID   string `uri:"id"`
 }
 
 // https://docs.joinmastodon.org/methods/conversations/#read
 // POST /api/v1/conversations/:id/read
 // Returns: Conversation
 type PostConversationRead struct {
-	Host          string `header:"Host"`
-	Authorization string `header:"Authorization"`
-	ID            string `uri:"id"`
+	Host string `header:"Host"`
+	ID   string `uri:"id"`
 }

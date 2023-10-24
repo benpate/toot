@@ -10,17 +10,15 @@ package txn
 // GET /api/v1/lists
 // Returns: Array of List
 type GetLists struct {
-	Host          string `header:"Host"`
-	Authorization string `header:"Authorization"`
+	Host string `header:"Host"`
 }
 
 // https://docs.joinmastodon.org/methods/lists/#get-one
 // GET /api/v1/lists/:id
 // Returns: List
 type GetList struct {
-	Host          string `header:"Host"`
-	Authorization string `header:"Authorization"`
-	ID            string `param:"id"`
+	Host string `header:"Host"`
+	ID   string `param:"id"`
 }
 
 // https://docs.joinmastodon.org/methods/lists/#create
@@ -28,7 +26,6 @@ type GetList struct {
 // Returns: List
 type PostList struct {
 	Host          string `header:"Host"`
-	Authorization string `header:"Authorization"`
 	Title         string `form:"title"`
 	RepliesPolicy string `form:"replies_policy"`
 	Exclusive     bool   `form:"exclusive"`
@@ -39,7 +36,6 @@ type PostList struct {
 // Returns: List
 type PutList struct {
 	Host          string `header:"Host"`
-	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`
 	Title         string `form:"title"`
 	RepliesPolicy string `form:"replies_policy"`
@@ -48,22 +44,20 @@ type PutList struct {
 // https://docs.joinmastodon.org/methods/lists/#delete
 // DELETE /api/v1/lists/:id
 type DeleteList struct {
-	Host          string `header:"Host"`
-	Authorization string `header:"Authorization"`
-	ID            string `param:"id"`
+	Host string `header:"Host"`
+	ID   string `param:"id"`
 }
 
 // https://docs.joinmastodon.org/methods/lists/#accounts
 // GET /api/v1/lists/:id/accounts
 // Returns: Array of Account
 type GetList_Accounts struct {
-	Host          string `header:"Host"`
-	Authorization string `header:"Authorization"`
-	ID            string `param:"id"`
-	MaxID         string `query:"max_id"`
-	SinceID       string `query:"since_id"`
-	MinID         string `query:"min_id"`
-	Limit         int    `query:"limit"`
+	Host    string `header:"Host"`
+	ID      string `param:"id"`
+	MaxID   string `query:"max_id"`
+	SinceID string `query:"since_id"`
+	MinID   string `query:"min_id"`
+	Limit   int    `query:"limit"`
 }
 
 // QueryPage implements the QueryPager interface, returning
@@ -82,10 +76,9 @@ func (t GetList_Accounts) QueryPage() QueryPage {
 // Returns: Empty Struct
 // Add accounts to the given list. Note that the user must be following these accounts.
 type PostList_Accounts struct {
-	Host          string   `header:"Host"`
-	Authorization string   `header:"Authorization"`
-	ID            string   `param:"id"`
-	AccountIDs    []string `form:"account_ids"`
+	Host       string   `header:"Host"`
+	ID         string   `param:"id"`
+	AccountIDs []string `form:"account_ids"`
 }
 
 // https://docs.joinmastodon.org/methods/lists/#accounts-remove
@@ -93,8 +86,7 @@ type PostList_Accounts struct {
 // Returns: Empty Struct
 // Remove accounts from the given list.
 type DeleteList_Accounts struct {
-	Host          string   `header:"Host"`
-	Authorization string   `header:"Authorization"`
-	ID            string   `param:"id"`
-	AccountIDs    []string `form:"account_ids"`
+	Host       string   `header:"Host"`
+	ID         string   `param:"id"`
+	AccountIDs []string `form:"account_ids"`
 }
