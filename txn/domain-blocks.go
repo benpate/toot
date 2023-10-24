@@ -10,23 +10,28 @@ package txn
 // GET /api/v1/domain_blocks
 // Returns: Array of String
 type GetDomainBlocks struct {
-	Host string `header:"Host"`
-
-	QueryPage
+	Host          string `header:"Host"`
+	Authorization string `header:"Authorization"`
+	MaxID         string `query:"max_id"`
+	SinceID       string `query:"since_id"`
+	MinID         string `query:"min_id"`
+	Limit         int    `query:"limit"`
 }
 
 // https://docs.joinmastodon.org/methods/domain_blocks/#block
 // POST /api/v1/domain_blocks
 // Returns: Empty struct
 type PostDomainBlock struct {
-	Host   string `header:"Host"`
-	Domain string `form:"domain"`
+	Host          string `header:"Host"`
+	Authorization string `header:"Authorization"`
+	Domain        string `form:"domain"`
 }
 
 // https://docs.joinmastodon.org/methods/domain_blocks/#unblock
 // DELETE /api/v1/domain_blocks
 // Returns: Empty struct
 type DeleteDomainBlock struct {
-	Host   string `header:"Host"`
-	Domain string `form:"domain"`
+	Host          string `header:"Host"`
+	Authorization string `header:"Authorization"`
+	Domain        string `form:"domain"`
 }

@@ -10,15 +10,17 @@ package txn
 // GET /api/v2/filters
 // Returns: Array of Filter
 type GetFilters struct {
-	Host string `header:"Host"`
+	Host          string `header:"Host"`
+	Authorization string `header:"Authorization"`
 }
 
 // https://docs.joinmastodon.org/methods/filters/#get-one
 // GET /api/v2/filters/:id
 // Returns: Filter
 type GetFilter struct {
-	Host string `header:"Host"`
-	ID   string `param:"id"`
+	Host          string `header:"Host"`
+	Authorization string `header:"Authorization"`
+	ID            string `param:"id"`
 }
 
 // https://docs.joinmastodon.org/methods/filters/#create
@@ -27,6 +29,7 @@ type GetFilter struct {
 // Create a filter group with the given parameters.
 type PostFilter struct {
 	Host               string   `header:"Host"`
+	Authorization      string   `header:"Authorization"`
 	Title              string   `form:"title"`
 	Context            []string `form:"context"`
 	FilterAction       string   `form:"filter_action"`
@@ -44,6 +47,7 @@ type PostFilter struct {
 // Update a filter group with the given parameters.
 type PutFilter struct {
 	Host               string   `header:"Host"`
+	Authorization      string   `header:"Authorization"`
 	ID                 string   `param:"id"`           // The ID of the Filter in the database.
 	Title              string   `form:"title"`         // The name of the filter group.
 	Context            []string `form:"context"`       // Where the filter should be applied. Specify at least one of home, notifications, public, thread, account.
@@ -63,8 +67,9 @@ type PutFilter struct {
 // Returns: Empty object
 // Delete a filter group.
 type DeleteFilter struct {
-	Host string `header:"Host"`
-	ID   string `param:"id"` // The ID of the Filter in the database.
+	Host          string `header:"Host"`
+	Authorization string `header:"Authorization"`
+	ID            string `param:"id"` // The ID of the Filter in the database.
 }
 
 // https://docs.joinmastodon.org/methods/filters/#keywords-get
@@ -72,8 +77,9 @@ type DeleteFilter struct {
 // Returns: Array of FilterKeyword
 // List all keywords attached to the current filter group.
 type GetFilter_Keywords struct {
-	Host     string `header:"Host"`
-	FilterID string `param:"filter_id"` // The ID of the Filter in the database.
+	Host          string `header:"Host"`
+	Authorization string `header:"Authorization"`
+	FilterID      string `param:"filter_id"` // The ID of the Filter in the database.
 }
 
 // https://docs.joinmastodon.org/methods/filters/#keywords-create
@@ -81,10 +87,11 @@ type GetFilter_Keywords struct {
 // Returns: FilterKeyword
 // Add the given keyword to the specified filter group
 type PostFilter_Keyword struct {
-	Host      string `header:"Host"`
-	FilterID  string `param:"filter_id"` // The ID of the Filter in the database.
-	Keyword   string `form:"keyword"`    // The keyword to be added to the filter group.
-	WholeWord bool   `form:"whole_word"` // Whether the keyword should consider word boundaries.
+	Host          string `header:"Host"`
+	Authorization string `header:"Authorization"`
+	FilterID      string `param:"filter_id"` // The ID of the Filter in the database.
+	Keyword       string `form:"keyword"`    // The keyword to be added to the filter group.
+	WholeWord     bool   `form:"whole_word"` // Whether the keyword should consider word boundaries.
 }
 
 // https://docs.joinmastodon.org/methods/filters/#keywords-get-one
@@ -92,8 +99,9 @@ type PostFilter_Keyword struct {
 // Returns: FilterKeyword
 // Get one filter keyword by the given id
 type GetFilter_Keyword struct {
-	Host string `header:"Host"`
-	ID   string `param:"id"` // The ID of the FilterKeyword in the database.
+	Host          string `header:"Host"`
+	Authorization string `header:"Authorization"`
+	ID            string `param:"id"` // The ID of the FilterKeyword in the database.
 }
 
 // https://docs.joinmastodon.org/methods/filters/#keywords-update
@@ -101,10 +109,11 @@ type GetFilter_Keyword struct {
 // Returns: FilterKeyword
 // Update the given filter keyword.
 type PutFilter_Keyword struct {
-	Host      string `header:"Host"`
-	ID        string `param:"id"`        // The ID of the FilterKeyword in the database.
-	Keyword   string `form:"keyword"`    // The keyword to be added to the filter group.
-	WholeWord bool   `form:"whole_word"` // Whether the keyword should consider word boundaries.
+	Host          string `header:"Host"`
+	Authorization string `header:"Authorization"`
+	ID            string `param:"id"`        // The ID of the FilterKeyword in the database.
+	Keyword       string `form:"keyword"`    // The keyword to be added to the filter group.
+	WholeWord     bool   `form:"whole_word"` // Whether the keyword should consider word boundaries.
 }
 
 // https://docs.joinmastodon.org/methods/filters/#keywords-delete
@@ -112,8 +121,9 @@ type PutFilter_Keyword struct {
 // Returns: Empty object
 // Delete the given filter keyword.
 type DeleteFilter_Keyword struct {
-	Host string `header:"Host"`
-	ID   string `param:"id"` // The ID of the FilterKeyword in the database.
+	Host          string `header:"Host"`
+	Authorization string `header:"Authorization"`
+	ID            string `param:"id"` // The ID of the FilterKeyword in the database.
 }
 
 // https://docs.joinmastodon.org/methods/filters/#statuses-get
@@ -121,8 +131,9 @@ type DeleteFilter_Keyword struct {
 // Returns: Array of FilterStatus
 // Obtain a list of all status filters within this filter group.
 type GetFilter_Statuses struct {
-	Host     string `header:"Host"`
-	FilterID string `param:"filter_id"` // The ID of the Filter in the database.
+	Host          string `header:"Host"`
+	Authorization string `header:"Authorization"`
+	FilterID      string `param:"filter_id"` // The ID of the Filter in the database.
 }
 
 // https://docs.joinmastodon.org/methods/filters/#statuses-add
@@ -130,8 +141,9 @@ type GetFilter_Statuses struct {
 // Returns: FilterStatus
 // Add a status filter to the current filter group.
 type PostFilter_Status struct {
-	Host     string `header:"Host"`
-	FilterID string `param:"filter_id"` // The ID of the Filter in the database.
+	Host          string `header:"Host"`
+	Authorization string `header:"Authorization"`
+	FilterID      string `param:"filter_id"` // The ID of the Filter in the database.
 }
 
 // https://docs.joinmastodon.org/methods/filters/#statuses-get-one
@@ -139,8 +151,9 @@ type PostFilter_Status struct {
 // Returns: FilterStatus
 // Obtain a single status filter.
 type GetFilter_Status struct {
-	Host string `header:"Host"`
-	ID   string `param:"id"` // The ID of the FilterStatus in the database.
+	Host          string `header:"Host"`
+	Authorization string `header:"Authorization"`
+	ID            string `param:"id"` // The ID of the FilterStatus in the database.
 }
 
 // https://docs.joinmastodon.org/methods/filters/#statuses-remove
@@ -148,54 +161,60 @@ type GetFilter_Status struct {
 // Returns: FilterStatus
 // Remove a status filter from the current filter group.
 type DeleteFilter_Status struct {
-	Host string `header:"Host"`
-	ID   string `param:"id"` // The ID of the FilterStatus in the database.
+	Host          string `header:"Host"`
+	Authorization string `header:"Authorization"`
+	ID            string `param:"id"` // The ID of the FilterStatus in the database.
 }
 
 // https://docs.joinmastodon.org/methods/filters/#get-v1
 // GET /api/v1/filters
 // Returns List of V1::"Filter"
 type GetFilters_V1 struct {
-	Host string `header:"Host"`
+	Host          string `header:"Host"`
+	Authorization string `header:"Authorization"`
 }
 
 // https://docs.joinmastodon.org/methods/filters/#get-one-v1
 // GET /api/v1/filters/:id
 // Returns V1::"Filter"
 type GetFilter_V1 struct {
-	Host string `header:"Host"`
-	ID   string `param:"id"`
+	Host          string `header:"Host"`
+	Authorization string `header:"Authorization"`
+	ID            string `param:"id"`
 }
 
 // https://docs.joinmastodon.org/methods/filters/#create-v1
 // POST /api/v1/filters
 // Returns V1::"Filter"
 type PostFilter_V1 struct {
-	Host         string   `header:"Host"`
-	Phrase       string   `form:"phrase"`
-	Context      []string `form:"context"`
-	Irreversible bool     `form:"irreversible"`
-	WholeWord    bool     `form:"whole_word"`
-	ExpiresIn    int      `form:"expires_in"`
+	Host          string   `header:"Host"`
+	Authorization string   `header:"Authorization"`
+	Phrase        string   `form:"phrase"`
+	Context       []string `form:"context"`
+	Irreversible  bool     `form:"irreversible"`
+	WholeWord     bool     `form:"whole_word"`
+	ExpiresIn     int      `form:"expires_in"`
 }
 
 // https://docs.joinmastodon.org/methods/filters/#update-v1
 // PUT /api/v1/filters/:id
 // Returns V1::"Filter"
 type PutFilter_V1 struct {
-	Host         string   `header:"Host"`
-	ID           string   `param:"id"`
-	Phrase       string   `form:"phrase"`
-	Context      []string `form:"context"`
-	Irreversible bool     `form:"irreversible"`
-	WholeWord    bool     `form:"whole_word"`
-	ExpiresIn    int      `form:"expires_in"`
+	Host          string   `header:"Host"`
+	Authorization string   `header:"Authorization"`
+	ID            string   `param:"id"`
+	Phrase        string   `form:"phrase"`
+	Context       []string `form:"context"`
+	Irreversible  bool     `form:"irreversible"`
+	WholeWord     bool     `form:"whole_word"`
+	ExpiresIn     int      `form:"expires_in"`
 }
 
 // https://docs.joinmastodon.org/methods/filters/#delete-v1
 // DELETE /api/v1/filters/:id
 // Returns Empty object
 type DeleteFilter_V1 struct {
-	Host string `header:"Host"`
-	ID   string `param:"id"`
+	Host          string `header:"Host"`
+	Authorization string `header:"Authorization"`
+	ID            string `param:"id"`
 }

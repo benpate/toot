@@ -21,5 +21,6 @@ type PostApplication struct {
 // GET /api/v1/apps/verify_credentials
 // Returns: Application
 type GetApplication_VerifyCredentials struct {
-	Host string `header:"Host"`
+	Host          string `header:"Host"`
+	Authorization string `header:"Authorization"`
 }

@@ -11,7 +11,10 @@ package txn
 // Returns: Array of Status
 // Statuses the user has bookmarked.
 type GetBookmarks struct {
-	Host string `header:"Host"`
-
-	QueryPage
+	Host          string `header:"Host"`
+	Authorization string `header:"Authorization"`
+	MaxID         string `query:"max_id"`
+	SinceID       string `query:"since_id"`
+	MinID         string `query:"min_id"`
+	Limit         int    `query:"limit"`
 }
