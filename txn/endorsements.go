@@ -14,7 +14,7 @@ type GetEndorsements struct {
 	MaxID   string `query:"max_id"`
 	MinID   string `query:"min_id"`
 	SinceID string `query:"since_id"`
-	Limit   int    `query:"limit"`
+	Limit   int64  `query:"limit"`
 }
 
 // QueryPage implements the QueryPager interface, returning

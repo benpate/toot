@@ -69,7 +69,7 @@ type GetStatus_RebloggedBy struct {
 	MaxID   string `query:"max_id"`
 	MinID   string `query:"min_id"`
 	SinceID string `query:"since_id"`
-	Limit   int    `query:"limit"`
+	Limit   int64  `query:"limit"`
 }
 
 // QueryPage implements the QueryPager interface, returning
@@ -92,7 +92,7 @@ type GetStatus_FavouritedBy struct {
 	MaxID   string `query:"max_id"`
 	MinID   string `query:"min_id"`
 	SinceID string `query:"since_id"`
-	Limit   int    `query:"limit"`
+	Limit   int64  `query:"limit"`
 }
 
 // QueryPage implements the QueryPager interface, returning

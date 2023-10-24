@@ -14,7 +14,7 @@ type GetNotifications struct {
 	MaxID        string   `query:"max_id"`
 	SinceID      string   `query:"since_id"`
 	MinID        string   `query:"min_id"`
-	Limit        int      `query:"limit"`
+	Limit        int64    `query:"limit"`
 	Types        []string `query:"types"`
 	ExcludeTypes []string `query:"exclude_types"`
 	AccountID    string   `query:"account_id"`

@@ -15,7 +15,7 @@ type GetDomainBlocks struct {
 	MaxID         string `query:"max_id"`
 	SinceID       string `query:"since_id"`
 	MinID         string `query:"min_id"`
-	Limit         int    `query:"limit"`
+	Limit         int64  `query:"limit"`
 }
 
 // QueryPage implements the QueryPager interface, returning
