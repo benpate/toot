@@ -32,7 +32,7 @@ type API[AuthToken ScopesGetter] struct {
 	PostAccount_Unmute             func(AuthToken, txn.PostAccount_Unmute) (object.Relationship, error)
 	PostAccount_Pin                func(AuthToken, txn.PostAccount_Pin) (object.Relationship, error)
 	PostAccount_Unpin              func(AuthToken, txn.PostAccount_Unpin) (object.Relationship, error)
-	PostAccount_Note               func(AuthToken, txn.PostAccount_Note) (object.Status, error)
+	PostAccount_Note               func(AuthToken, txn.PostAccount_Note) (object.Relationship, error)
 	GetAccount_Relationships       func(AuthToken, txn.GetAccount_Relationships) ([]object.Relationship, error)
 	GetAccount_FamiliarFollowers   func(AuthToken, txn.GetAccount_FamiliarFollowers) (object.FamiliarFollowers, error)
 	GetAccount_Search              func(AuthToken, txn.GetAccount_Search) ([]object.Account, error)
