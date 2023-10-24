@@ -73,8 +73,20 @@ type GetStatus_RebloggedBy struct {
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`
 	MaxID         string `query:"max_id"`
+	MinID         string `query:"min_id"`
 	SinceID       string `query:"since_id"`
 	Limit         int    `query:"limit"`
+}
+
+// QueryPage implements the QueryPager interface, returning
+// the QueryPage data embedded in this transaction
+func (t GetStatus_RebloggedBy) QueryPage() QueryPage {
+	return QueryPage{
+		MaxID:   t.MaxID,
+		SinceID: t.SinceID,
+		MinID:   t.MinID,
+		Limit:   t.Limit,
+	}
 }
 
 // https://docs.joinmastodon.org/methods/statuses/#favourited_by
@@ -85,8 +97,20 @@ type GetStatus_FavouritedBy struct {
 	Authorization string `header:"Authorization"`
 	ID            string `param:"id"`
 	MaxID         string `query:"max_id"`
+	MinID         string `query:"min_id"`
 	SinceID       string `query:"since_id"`
 	Limit         int    `query:"limit"`
+}
+
+// QueryPage implements the QueryPager interface, returning
+// the QueryPage data embedded in this transaction
+func (t GetStatus_FavouritedBy) QueryPage() QueryPage {
+	return QueryPage{
+		MaxID:   t.MaxID,
+		SinceID: t.SinceID,
+		MinID:   t.MinID,
+		Limit:   t.Limit,
+	}
 }
 
 // https://docs.joinmastodon.org/methods/statuses/#favourite

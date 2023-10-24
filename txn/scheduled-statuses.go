@@ -18,6 +18,17 @@ type GetScheduledStatuses struct {
 	Limit         int    `query:"limit"`
 }
 
+// QueryPage implements the QueryPager interface, returning
+// the QueryPage data embedded in this transaction
+func (t GetScheduledStatuses) QueryPage() QueryPage {
+	return QueryPage{
+		MaxID:   t.MaxID,
+		SinceID: t.SinceID,
+		MinID:   t.MinID,
+		Limit:   t.Limit,
+	}
+}
+
 // https://docs.joinmastodon.org/methods/scheduled_statuses/#get-one
 // GET /api/v1/scheduled_statuses/:id
 // Returns: ScheduledStatus

@@ -40,6 +40,17 @@ type GetTimeline_Hashtag struct {
 	Limit         int      `query:"limit"`
 }
 
+// QueryPage implements the QueryPager interface, returning
+// the QueryPage data embedded in this transaction
+func (t GetTimeline_Hashtag) QueryPage() QueryPage {
+	return QueryPage{
+		MaxID:   t.MaxID,
+		SinceID: t.SinceID,
+		MinID:   t.MinID,
+		Limit:   t.Limit,
+	}
+}
+
 // https://docs.joinmastodon.org/methods/timelines/#home
 // GET /api/v1/timelines/home
 // Returns: []Status
@@ -50,6 +61,17 @@ type GetTimeline_Home struct {
 	SinceID       string `query:"since_id"`
 	MinID         string `query:"min_id"`
 	Limit         int    `query:"limit"`
+}
+
+// QueryPage implements the QueryPager interface, returning
+// the QueryPage data embedded in this transaction
+func (t GetTimeline_Home) QueryPage() QueryPage {
+	return QueryPage{
+		MaxID:   t.MaxID,
+		SinceID: t.SinceID,
+		MinID:   t.MinID,
+		Limit:   t.Limit,
+	}
 }
 
 // https://docs.joinmastodon.org/methods/timelines/#list
@@ -63,4 +85,15 @@ type GetTimeline_List struct {
 	SinceID       string `query:"since_id"`
 	MinID         string `query:"min_id"`
 	Limit         int    `query:"limit"`
+}
+
+// QueryPage implements the QueryPager interface, returning
+// the QueryPage data embedded in this transaction
+func (t GetTimeline_List) QueryPage() QueryPage {
+	return QueryPage{
+		MaxID:   t.MaxID,
+		SinceID: t.SinceID,
+		MinID:   t.MinID,
+		Limit:   t.Limit,
+	}
 }

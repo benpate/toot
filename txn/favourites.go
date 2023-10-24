@@ -17,3 +17,14 @@ type GetFavourites struct {
 	MinID         string `query:"min_id"`
 	Limit         int    `query:"limit"`
 }
+
+// QueryPage implements the QueryPager interface, returning
+// the QueryPage data embedded in this transaction
+func (t GetFavourites) QueryPage() QueryPage {
+	return QueryPage{
+		MaxID:   t.MaxID,
+		SinceID: t.SinceID,
+		MinID:   t.MinID,
+		Limit:   t.Limit,
+	}
+}

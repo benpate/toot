@@ -18,6 +18,17 @@ type GetDomainBlocks struct {
 	Limit         int    `query:"limit"`
 }
 
+// QueryPage implements the QueryPager interface, returning
+// the QueryPage data embedded in this transaction
+func (t GetDomainBlocks) QueryPage() QueryPage {
+	return QueryPage{
+		MaxID:   t.MaxID,
+		SinceID: t.SinceID,
+		MinID:   t.MinID,
+		Limit:   t.Limit,
+	}
+}
+
 // https://docs.joinmastodon.org/methods/domain_blocks/#block
 // POST /api/v1/domain_blocks
 // Returns: Empty struct

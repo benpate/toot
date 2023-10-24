@@ -19,6 +19,17 @@ type GetConversations struct {
 	Limit         int    `query:"limit"`
 }
 
+// QueryPage implements the QueryPager interface, returning
+// the QueryPage data embedded in this transaction
+func (t GetConversations) QueryPage() QueryPage {
+	return QueryPage{
+		MaxID:   t.MaxID,
+		SinceID: t.SinceID,
+		MinID:   t.MinID,
+		Limit:   t.Limit,
+	}
+}
+
 // https://docs.joinmastodon.org/methods/conversations/#delete
 // DELETE /api/v1/conversations/:id
 // Returns: Empty struct

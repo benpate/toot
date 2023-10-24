@@ -69,6 +69,17 @@ type GetAccount_Statuses struct {
 	Tagged         string `query:"tagged"`
 }
 
+// QueryPage implements the QueryPager interface, returning
+// the QueryPage data embedded in this transaction
+func (t GetAccount_Statuses) QueryPage() QueryPage {
+	return QueryPage{
+		MaxID:   t.MaxID,
+		SinceID: t.SinceID,
+		MinID:   t.MinID,
+		Limit:   t.Limit,
+	}
+}
+
 // https://docs.joinmastodon.org/methods/accounts/#followers
 // GET /api/v1/accounts/:id/followers
 type GetAccount_Followers struct {
@@ -81,6 +92,17 @@ type GetAccount_Followers struct {
 	Limit         int    `query:"limit"`
 }
 
+// QueryPage implements the QueryPager interface, returning
+// the QueryPage data embedded in this transaction
+func (t GetAccount_Followers) QueryPage() QueryPage {
+	return QueryPage{
+		MaxID:   t.MaxID,
+		SinceID: t.SinceID,
+		MinID:   t.MinID,
+		Limit:   t.Limit,
+	}
+}
+
 // https://docs.joinmastodon.org/methods/accounts/#following
 // GET /api/v1/accounts/:id/following
 type GetAccount_Following struct {
@@ -91,6 +113,17 @@ type GetAccount_Following struct {
 	SinceID       string `query:"since_id"`
 	MinID         string `query:"min_id"`
 	Limit         int    `query:"limit"`
+}
+
+// QueryPage implements the QueryPager interface, returning
+// the QueryPage data embedded in this transaction
+func (t GetAccount_Following) QueryPage() QueryPage {
+	return QueryPage{
+		MaxID:   t.MaxID,
+		SinceID: t.SinceID,
+		MinID:   t.MinID,
+		Limit:   t.Limit,
+	}
 }
 
 // https://docs.joinmastodon.org/methods/accounts/#featured_tags

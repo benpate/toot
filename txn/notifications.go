@@ -21,6 +21,17 @@ type GetNotifications struct {
 	AccountID     string   `query:"account_id"`
 }
 
+// QueryPage implements the QueryPager interface, returning
+// the QueryPage data embedded in this transaction
+func (t GetNotifications) QueryPage() QueryPage {
+	return QueryPage{
+		MaxID:   t.MaxID,
+		SinceID: t.SinceID,
+		MinID:   t.MinID,
+		Limit:   t.Limit,
+	}
+}
+
 // https://docs.joinmastodon.org/methods/notifications/#get-one
 // GET /api/v1/notifications/:id
 // Returns: Notification
