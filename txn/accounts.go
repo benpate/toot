@@ -56,7 +56,7 @@ type GetAccount_Statuses struct {
 	MaxID          string `query:"max_id"`
 	SinceID        string `query:"since_id"`
 	MinID          string `query:"min_id"`
-	Limit          int    `query:"limit"`
+	Limit          int64  `query:"limit"`
 	OnlyMedia      bool   `query:"only_media"`
 	ExcludeReplies bool   `query:"exclude_replies"`
 	ExcludeReblogs bool   `query:"exclude_reblogs"`
@@ -83,7 +83,7 @@ type GetAccount_Followers struct {
 	MaxID   string `query:"max_id"`
 	SinceID string `query:"since_id"`
 	MinID   string `query:"min_id"`
-	Limit   int    `query:"limit"`
+	Limit   int64  `query:"limit"`
 }
 
 // QueryPage implements the QueryPager interface, returning
@@ -105,7 +105,7 @@ type GetAccount_Following struct {
 	MaxID   string `query:"max_id"`
 	SinceID string `query:"since_id"`
 	MinID   string `query:"min_id"`
-	Limit   int    `query:"limit"`
+	Limit   int64  `query:"limit"`
 }
 
 // QueryPage implements the QueryPager interface, returning
