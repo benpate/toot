@@ -13,7 +13,7 @@ const GetNotifications = ReadNotifications
 const GetNotification = ReadNotifications
 
 // https://docs.joinmastodon.org/methods/notifications/#clear
-const PostNotification_Clear = WriteNotifications
+const PostNotifications_Clear = WriteNotifications
 
 // https://docs.joinmastodon.org/methods/notifications/#dismiss
 const PostNotification_Dismiss = WriteNotifications

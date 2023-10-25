@@ -13,7 +13,7 @@ const GetNotifications = "/api/v1/notifications"
 const GetNotification = "/api/v1/notifications/:id"
 
 // https://docs.joinmastodon.org/methods/notifications/#clear
-const PostNotification_Clear = "/api/v1/notifications/clear"
+const PostNotifications_Clear = "/api/v1/notifications/clear"
 
 // https://docs.joinmastodon.org/methods/notifications/#dismiss
 const PostNotification_Dismiss = "/api/v1/notifications/dismiss"

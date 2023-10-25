@@ -10,7 +10,7 @@ package route
 const GetAnnouncements = "/api/v1/announcements"
 
 // https://docs.joinmastodon.org/methods/announcements/#dismiss
-const PostAnnoucement_Dismis = "/api/v1/announcements/:id/dismiss"
+const PostAnnouncement_Dismiss = "/api/v1/announcements/:id/dismiss"
 
 // https://docs.joinmastodon.org/methods/announcements/#put-reactions
 const PutAnnouncement_Reaction = "/api/v1/announcements/:id/reactions/:name"
