@@ -122,18 +122,18 @@ type API[AuthToken ScopesGetter] struct {
 	GetInstance_ExtendedDescription func(AuthToken, txn.GetInstance_ExtendedDescription) (object.ExtendedDescription, error)
 
 	// https://docs.joinmastodon.org/methods/lists/
-	GetLists             func(AuthToken, txn.GetLists) ([]object.List, error)
-	GetList              func(AuthToken, txn.GetList) (object.List, error)
-	PostList             func(AuthToken, txn.PostList) (object.List, error)
-	PutList              func(AuthToken, txn.PutList) (object.List, error)
-	DeleteList           func(AuthToken, txn.DeleteList) (struct{}, error)
-	GetList_Accounts     func(AuthToken, txn.GetList_Accounts) ([]object.Account, error)
-	PostList_Accounts    func(AuthToken, txn.PostList_Accounts) (struct{}, error)
-	DeleteLisst_Accounts func(AuthToken, txn.DeleteList_Accounts) (struct{}, error)
+	GetLists            func(AuthToken, txn.GetLists) ([]object.List, error)
+	GetList             func(AuthToken, txn.GetList) (object.List, error)
+	PostList            func(AuthToken, txn.PostList) (object.List, error)
+	PutList             func(AuthToken, txn.PutList) (object.List, error)
+	DeleteList          func(AuthToken, txn.DeleteList) (struct{}, error)
+	GetList_Accounts    func(AuthToken, txn.GetList_Accounts) ([]object.Account, error)
+	PostList_Accounts   func(AuthToken, txn.PostList_Accounts) (struct{}, error)
+	DeleteList_Accounts func(AuthToken, txn.DeleteList_Accounts) (struct{}, error)
 
 	// https://docs.joinmastodon.org/methods/markers/
 	GetMarkers func(AuthToken, txn.GetMarkers) (object.Marker, error)
-	PosMarker  func(AuthToken, txn.PostMarker) (object.Marker, error)
+	PostMarker func(AuthToken, txn.PostMarker) (object.Marker, error)
 
 	// https://docs.joinmastodon.org/methods/media/
 	PostMedia func(AuthToken, txn.PostMedia) (object.MediaAttachment, error)
