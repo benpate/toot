@@ -7,7 +7,7 @@ package route
  ******************************************/
 
 // https://docs.joinmastodon.org/methods/follow_requests/#get
-const GetFollowRequests = " /api/v1/follow_requests"
+const GetFollowRequests = "/api/v1/follow_requests"
 
 // https://docs.joinmastodon.org/methods/follow_requests/#accept
 const PostFollowRequest_Authorize = "/api/v1/follow_requests/:account_id/authorize"

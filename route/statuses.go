@@ -22,7 +22,7 @@ const GetStatus_Context = "/api/v1/statuses/:id/context"
 const PostStatus_Translate = "/api/v1/statuses/:id/translate"
 
 // https://docs.joinmastodon.org/methods/statuses/#reblogged_by
-const RebloggedBy = "/api/v1/statuses/:id/reblogged_by"
+const GetStatus_RebloggedBy = "/api/v1/statuses/:id/reblogged_by"
 
 // https://docs.joinmastodon.org/methods/statuses/#favourited_by
 const GetStatus_FavouritedBy = "/api/v1/statuses/:id/favourited_by"
