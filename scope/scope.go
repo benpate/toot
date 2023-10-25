@@ -1,3 +1,4 @@
+// Package scope contains scope definitions for every Mastodon API route.
 package scope
 
 /******************************************
