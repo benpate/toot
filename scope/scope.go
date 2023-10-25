@@ -1,10 +1,19 @@
-package scopes
+package scope
 
 /******************************************
  * OAuth Scopes
  * Defining what you have permission to do with the API
  * https://docs.joinmastodon.org/api/oauth-scopes/
  ******************************************/
+
+// Public is not defined by the Mastodon API, but is used by this library
+// to indicate a public route that does not require an App token.
+const Public = ""
+
+// Private is not defined by the Mastodon API, but is used by this library
+// to indicate a private route that requires an App token, but does not
+// require any specific scope.
+const Private = "*"
 
 // https://docs.joinmastodon.org/api/oauth-scopes/#read
 const Read = "read"
