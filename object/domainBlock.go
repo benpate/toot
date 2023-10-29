@@ -8,3 +8,9 @@ type DomainBlock struct {
 	Severity string `json:"severity"`          // The level to which the domain is blocked. [silence | suspend]
 	Comment  string `json:"comment,omitempty"` // An optional reason for the domain block.
 }
+
+// Users from this domain will be hidden from timelines, threads, and notifications (unless you follow the user).
+const DomainBlockSeveritySilence = "silence"
+
+// Incoming messages from this domain will be rejected and dropped entirely.
+const DomainBlockSeveritySuspend = "suspend"
