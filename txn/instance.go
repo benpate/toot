@@ -9,7 +9,9 @@ package txn
 // https://docs.joinmastodon.org/methods/instance/#v2
 // GET /api/v2/instance
 // Returns: Instance
-type GetInstance struct{}
+type GetInstance struct {
+	Host string `header:"Host"`
+}
 
 // https://docs.joinmastodon.org/methods/instance/#peers
 // GET /api/v1/instance/peers
