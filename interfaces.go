@@ -2,11 +2,16 @@ package toot
 
 import "net/http"
 
-// APIFunc represents an API method.
-type APIFunc[AuthToken ScopesGetter, Input any, Output any] func(AuthToken, Input) (Output, error)
+// APIFunc represents an API method. It can return either a single result or a paged result.
+type APIFunc[AuthToken ScopesGetter, Input any, Output any] interface {
+	APIFunc_SingleResult[AuthToken, Input, Output] | APIFunc_PagedResult[AuthToken, Input, Output]
+}
 
-// APIFuncWithHeader represents an API method that includes custom header results.
-type APIFuncWithHeader[AuthToken ScopesGetter, Input any, Output any] func(AuthToken, Input) (Output, http.Header, error)
+// APIFunc_SingleResult represents an API method that returns a single result.
+type APIFunc_SingleResult[AuthToken ScopesGetter, Input any, Output any] func(AuthToken, Input) (Output, error)
+
+// APIFunc_PagedResult represents an API method that returns a many results with pagination data.
+type APIFunc_PagedResult[AuthToken ScopesGetter, Input any, Output any] func(AuthToken, Input) (Output, PageInfo, error)
 
 // Authorizer represents a function that can authorize an HTTP request.
 // If the Bearer token is valid, then it returns an AuthToken object (which is also a ScopesGetter).
