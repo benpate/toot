@@ -11,10 +11,10 @@ package txn
 // Returns: Application
 type PostApplication struct {
 	Host         string `header:"Host"`
-	ClientName   string `form:"client_name"`
-	RedirectURIs string `form:"redirect_uris"`
-	Scopes       string `form:"scopes"`
-	Website      string `form:"website"`
+	ClientName   string `form:"client_name"   json:"client_name"`
+	RedirectURIs string `form:"redirect_uris" json:"redirect_uris"`
+	Scopes       string `form:"scopes"        json:"scopes"`
+	Website      string `form:"website"       json:"website"`
 }
 
 // https://docs.joinmastodon.org/methods/apps/#verify_credentials
