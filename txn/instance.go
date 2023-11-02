@@ -52,3 +52,11 @@ type GetInstance_DomainBlocks struct {
 type GetInstance_ExtendedDescription struct {
 	Host string `header:"Host"`
 }
+
+// https://docs.joinmastodon.org/methods/instance/#v1
+// GET /api/v1/instance
+// Returns: Instance_V1
+// Obtain general information about the server.
+type GetInstance_V1 struct {
+	Host string `header:"Host"`
+}

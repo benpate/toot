@@ -23,3 +23,6 @@ const GetInstance_DomainBlocks = "/api/v1/instance/domain_blocks"
 
 // https://docs.joinmastodon.org/methods/instance/#extended_description
 const GetInstance_ExtendedDescription = "/api/v1/instance/extended_description"
+
+// https://docs.joinmastodon.org/methods/instance/#v1
+const GetInstance_V1 = "/api/v1/instance"

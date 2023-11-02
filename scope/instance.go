@@ -23,3 +23,6 @@ const GetInstance_DomainBlocks = Public
 
 // https://docs.joinmastodon.org/methods/instance/#extended_description
 const GetInstance_ExtendedDescription = Public
+
+// https://docs.joinmastodon.org/methods/instance/#v1
+const GetInstance_V1 = Public
