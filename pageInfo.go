@@ -15,6 +15,16 @@ type PageInfo struct {
 // SetHeaders adds pagination headers to a response.
 func (p PageInfo) SetHeaders(response *http.Response) {
 
+	// NPE Guard
+	if response.Request == nil {
+		return
+	}
+
+	// NPE Guard
+	if response.Request.URL == nil {
+		return
+	}
+
 	uri := response.Request.URL.String()
 	uri, _, _ = strings.Cut(uri, "?")
 
