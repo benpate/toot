@@ -100,6 +100,7 @@ type API[AuthToken ScopesGetter] struct {
 	PostFilter_Status    func(AuthToken, txn.PostFilter_Status) (object.FilterStatus, error)
 	GetFilter_Status     func(AuthToken, txn.GetFilter_Status) (object.FilterStatus, error)
 	DeleteFilter_Status  func(AuthToken, txn.DeleteFilter_Status) (struct{}, error)
+	GetFilters_V1        func(AuthToken, txn.GetFilters_V1) ([]object.Filter, PageInfo, error)
 	GetFilter_V1         func(AuthToken, txn.GetFilter_V1) (object.Filter, error)
 	PostFilter_V1        func(AuthToken, txn.PostFilter_V1) (object.Filter, error)
 	PutFilter_V1         func(AuthToken, txn.PutFilter_V1) (object.Filter, error)
